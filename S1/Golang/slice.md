@@ -1,4 +1,4 @@
-## Nizovi, slice-ovi i mape
+# Nizovi, slice-ovi i mape
 
 ## Nizovi
 
@@ -11,7 +11,7 @@ klubovi[1] = "Spartak"                      // promena drugog elementa
 fmt.Println(klubovi[2])                     // index out of bounds greška
 ```
 
-### Slices
+## Slices
 
 Statički nizovi se, međutim, veoma retko pojavljuju u go-u, već se umesto njih uglavnom koriste `slice`-ovi. Slice je apstrakcija nad statičkim nizom. Sastoji se od 3 podatka:
 1. Pokazivač na statički niz nad kojim je napravljen
@@ -82,7 +82,7 @@ Sve što je ovde napisano je sa još više detalja opisano u [ovom članku](http
 
 Snimak o slice-ovima možete pogledati <a href='https://youtu.be/ZupwE3TCgdY'>ovde</a>.  
 
-### Mape
+## Mape
 
 Key-value struktura u go-u naziva se mapa. Prilikom kreiranja mapa treba da definišemo tip podataka koji ćemo koristiti kao ključ, i tip koji ćemo koristiti kao vrednost.
 
