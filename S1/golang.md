@@ -177,5 +177,6 @@ Ako nas ipak interesuje samo prva promenjiva, a druga ne, koristićemo sledeću 
 a, _ := test_funkcija(1, 2, "test")
 ```
 
-Video o strukturama podataka možete pogledati <a href='https://youtu.be/Crb5irYjq60'>ovde</a>.
+## Strukture podataka
+Video o strukturama podataka možete pogledati <a href='https://youtu.be/Crb5irYjq60'>ovde</a>.  
 Video o interfejsu možete pogledati <a href='https://youtu.be/h6Npp4Bfymc'>ovde</a>.
