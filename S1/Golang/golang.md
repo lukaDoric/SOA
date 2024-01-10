@@ -20,11 +20,11 @@ Jedna od glavnih mana kompajliranih jezika jeste distribucija programa. Moramo p
 
 Pored toga Go ima _out-of-the-box_ podršku za rad sa mrežnim protokolima poput **HTTP**-a i **gRPC**-a, što je još jedan plus s obzirom da pišemo veb servise.
 
-Na sledećem <a href=''>link-u </a> možeš videti kako da pokreneš prvi Golang program.  
-Na sledećem link-u možeš videti strukture podataka i osnovnu sintaksu u Golang-u.  
-Na sledećem link-u možeš videti mape i slice-ove u Golang-u.  
-Na sledećem link-u možeš videti pisanje konkurentnog pograma u Golang-u.  
-Na kraju možeš videti kako da napišeš čitav REST servis u Golang-u.  
+Na sledećem <a href='https://github.com/lukaDoric/SOA/blob/main/S1/Golang/prviProgram.md'>link-u</a> možeš videti kako da pokreneš prvi Golang program.  
+Na sledećem <a href='https://github.com/lukaDoric/SOA/blob/main/S1/Golang/strukturePodataka.md'>link-u</a> možeš videti strukture podataka i osnovnu sintaksu u Golang-u.  
+Na sledećem <a href='https://github.com/lukaDoric/SOA/blob/main/S1/Golang/slice.md'>link-u</a> možeš videti mape i slice-ove u Golang-u.  
+Na sledećem <a href='https://github.com/lukaDoric/SOA/blob/main/S1/Golang/konkurentni.md'>link-u</a> možeš videti pisanje konkurentnog pograma u Golang-u.  
+Na kraju <a href='https://github.com/lukaDoric/SOA/blob/main/S1/Golang/rest.md'>ovde</a> možeš videti kako da napišeš čitav REST servis u Golang-u.  
 
 
 ## Prvi Go program
