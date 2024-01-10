@@ -1,3 +1,5 @@
+# Osnovni koncepti mikroservisne arhitekture
+
 Kroz prvi sprint ćeš već upoznati osnovne koncepte mikroservisne arhitekture.
 
 Mikroservisna arhitektura spada u tipove servisno orijentisanih arhitektura. Mikroservisna aplikacija je kolekcija međusobno slabo zavisnih servisa modelovanih oko poslovnog domena.
