@@ -1,4 +1,4 @@
-## Prvi Go program
+# Prvi Go program
 
 Da biste pratili vežbe, potrebno je da prvo [instalirate go](https://go.dev/doc/install).
 
