@@ -73,6 +73,6 @@ Prelaskom na mikroservisnu arhitekturu odričemo se mogućnosti da na jednostava
 
 ### Monitoring
 
-Na slici ispod možemo videti dijagram komunikacije mikroservisa u Uber aplikaciji. Pozivi se često protežu kroz više servisa i nije jednostavno identifikovati gde je tačno uzrok nekog problema kada do njega dođe. Iz tog razloga poseban akcenat moramo staviti na observability naših aplikacija - logove, metrike i distribuirani tracing. O ovome ćete čuti dosta više na narednim terminima vežbi.
+Na slici ispod možemo videti dijagram komunikacije mikroservisa u Netflix aplikaciji. Pozivi se često protežu kroz više servisa i nije jednostavno identifikovati gde je tačno uzrok nekog problema kada do njega dođe. Iz tog razloga poseban akcenat moramo staviti na observability naših aplikacija - logove, metrike i distribuirani tracing. O ovome ćete čuti dosta više na narednim terminima vežbi.
 
-<img src="https://blog.uber-cdn.com/cdn-cgi/image/width=512,quality=80,onerror=redirect,format=auto/wp-content/uploads/2020/07/unnamed-1.png" alt="diagram" border="0" width=50% />
+<img src="https://ibb.co/KKPFXKm" alt="diagram" border="0" width=50% />
