@@ -75,4 +75,4 @@ Prelaskom na mikroservisnu arhitekturu odričemo se mogućnosti da na jednostava
 
 Na slici ispod možemo videti dijagram komunikacije mikroservisa u Netflix aplikaciji. Pozivi se često protežu kroz više servisa i nije jednostavno identifikovati gde je tačno uzrok nekog problema kada do njega dođe. Iz tog razloga poseban akcenat moramo staviti na observability naših aplikacija - logove, metrike i distribuirani tracing. O ovome ćete čuti dosta više na narednim terminima vežbi.
 
-<img src="https://ibb.co/KKPFXKm" alt="diagram" border="0" width=50% />
+<a href="https://ibb.co/KKPFXKm"><img src="https://i.ibb.co/CPchzPW/Netflix-High-Level-System-Architecture.png" alt="Netflix-High-Level-System-Architecture" border="0" /></a>
