@@ -12,23 +12,33 @@ Ovi nedostaci su u priču uključili kontejnere. Za razliku od virtuelnih mašin
 
 <h2>2. Šta je Docker i koje su njegove komponente?</h2>
 
-Docker je open-source platforma koja automatizuje proces deployment-a aplikacija u softverske kontejnere. On dodaje application deployment engine na vrh virtuelized container execution environment-a pri čemu je dizajniran tako da omogući lagano i brzo okruženje za izvršavanje naših aplikacija kao i izuzetno lako premeštanje aplikacija iz jednog okruženja u drugo (<span style="color: red;">test</span> -> <span style="color: red;">production</span>).
+Docker je open-source platforma koja automatizuje proces deployment-a aplikacija u softverske kontejnere. On dodaje application deployment engine na vrh virtuelized container execution environment-a pri čemu je dizajniran tako da omogući lagano i brzo okruženje za izvršavanje naših aplikacija kao i izuzetno lako premeštanje aplikacija iz jednog okruženja u drugo (`test` -> `production`).
 
 Njegove osnovne komponente su:
 
-Docker Engine
-Docker Images
-Registries (Docker Hub)
-Docker containers
-Docker Swarm
+- Docker Engine
+- Docker Images
+- Registries (Docker Hub)
+- Docker containers
+- Docker Swarm
 
-Kada pričamo o Docker Engine-u, govorimo o klasičnoj klijent-server aplikaciji. Docker klijent nam pruža CLI (command line interface) putem kojeg unosimo komande na osnovu kojih se generišu API request-ovi koji se šalju serveru (Docker daemon-u) koji ih obrađuje. Sam Docker daemon je nakon refaktorisanja (zbog toga što je narastao u jedan veliki monolit) ostao bez ikakvog koda koji zaista kreira i pokreće kontejnere. On se obraća putem gRPC API-a preko lokalnog Linux socket-a containerd-u (long running daemon-u) koji predstavlja "API fasadu" koja omogućuje startovanje containerd-shim-a odnosno roditeljskog procesa za svaki kontejner gde runc (container runtime) vrši kreiranje kontejnera. Sloj ispod containerd-a vrši kompletan rad sa kernelom odnosno koristi njegove funkcije. Iako arhitektura izgleda prilično kompleksno, ovakva podela omogućuje da se pojedine komponente bez ikakvih problema zamenjuju a da to ne utiče na pokrenute kontejnere što sa administratorske tačke gledišta puno olakšava stvari. Na primer, moguće je promeniti verziju Docker-a a da se pri tome ne moraju zaustavljati već pokrenuti kontejneri.
+Kada pričamo o Docker Engine-u, govorimo o klasičnoj klijent-server aplikaciji. Docker klijent nam pruža CLI (command line interface) putem kojeg unosimo komande na osnovu kojih se generišu API request-ovi koji se šalju serveru (Docker daemon-u) koji ih obrađuje.
+
+![image-002](https://github.com/lukaDoric/SOA/assets/45179708/c0e4918a-0c78-4abb-9184-3003b54d9f4f)
+
+Sam Docker daemon je nakon refaktorisanja (zbog toga što je narastao u jedan veliki monolit) ostao bez ikakvog koda koji zaista kreira i pokreće kontejnere. On se obraća putem gRPC API-a preko lokalnog Linux socket-a `containerd`-u (long running daemon-u) koji predstavlja "API fasadu" koja omogućuje startovanje containerd-shim-a odnosno roditeljskog procesa za svaki kontejner gde runc (container runtime) vrši kreiranje kontejnera. Sloj ispod containerd-a vrši kompletan rad sa kernelom odnosno koristi njegove funkcije. Iako arhitektura izgleda prilično kompleksno, ovakva podela omogućuje da se pojedine komponente bez ikakvih problema zamenjuju a da to ne utiče na pokrenute kontejnere što sa administratorske tačke gledišta puno olakšava stvari. Na primer, moguće je promeniti verziju Docker-a a da se pri tome ne moraju zaustavljati već pokrenuti kontejneri.
 
 <h2>3. Šta su Docker slike?</h2>
 
 Generalno je poznat koncept slike kada je priča o virtuelnim mašinama. Za sličnu stvar se koriste i Docker slike, odnosno predstavljaju build-time konstrukt od kojih nastaju kontejneri, ali se tu sličnost završava. Docker slike predstavljaju skup read-only layer-a gde svaki sloj predstavlja različitosti u fajlsistemu u odnosu na prethodni sloj, pri čemu uvek postoji jedan bazni (base) sloj. Upotrebom storage driver-a skup svih slojeva čini root filesystem kontejnera, odnosno svi slojevi izgledaju kao jedan unificirani fajlsistem.
 
+![image-003](https://github.com/lukaDoric/SOA/assets/45179708/cbc05507-5818-4642-8c54-850bd7136e81)
+
+![image-004](https://github.com/lukaDoric/SOA/assets/45179708/97093118-f6a0-452d-97da-b8e748057547)
+
 Svi ovi read-only slojevi predstavljaju osnovu za svaki kontejner koji se pokreće i ne mogu se menjati. Prilikom pokretanja svakog kontejnera, Docker dodaje još jedan sloj koji je read-write tipa i u koji se upisuju nove datoteke i sve izmene. Ukoliko želimo da menjamo neki fajl koji se nalazi u nekom read-only sloju, taj fajl će biti kopiran u read-write sloj, biće izmenjen i kao takav dalje korišćen. Originalna verzija će i dalje postojati (nepromenjena), ali nalaziće se "skrivena" ispod nove verzije.
+
+![image-005](https://github.com/lukaDoric/SOA/assets/45179708/f8271035-8fad-40cd-931b-941f81c69d8a)
 
 Ovakav mehanizam se zove Copy-on-write i delom čini Docker zaista moćnim. Koliko god kontejnera da kreiramo, read-only slojevi će uvek biti isti, tj. ostaće nepromenjeni, samo će svaki kontejner dobiti sopstveni read-write sloj. Na ovaj način se štedi jako puno prostora na disku jer kada smo jednom preuzeli/kreirali sliku, koliko god kontejnera da pokrenemo, slika ostaje apsolutno nepromenjena.
 
@@ -40,37 +50,53 @@ Postojeći Docker registri nude mesto gde korisnici mogu da preuzmu već postoje
 
 <h2>5. Šta predstavljaju kontejneri?</h2>
 
-Kako slike predstavljaju build-time konstrukt, tako su kontejneri run-time konstrukt. Gruba analogija odnosa između slike i kontejnera se može posmatrati kao klasa i instanca te klase. Kontejneri predstavljaju lightweight execution environment koji omogućuju izolovanje aplikacije i njenih zavisnosti koristeći kernel namespaces i cgroups mehanizme.
+Kako slike predstavljaju build-time konstrukt, tako su kontejneri run-time konstrukt. Gruba analogija odnosa između slike i kontejnera se može posmatrati kao klasa i instanca te klase. Kontejneri predstavljaju lightweight execution environment koji omogućuju izolovanje aplikacije i njenih zavisnosti koristeći `kernel namespaces` i `cgroups` mehanizme.
 
-Namespaces nam omogućuju izolaciju, odnosno da podelimo naš operativni sistem na manje izolovanih virtuelnih operativnih sistema (kontejnera). Odnosno, kontejneri smells-and-feels kao zasebni operativni sistemi (kao slučaj kod VM-a) samo što to nisu, jer svi dele isti kernel na host OS-u. Svaki kontejner ima sopstveni skup namespace-ova (kada pričamo o Linux-u to su namespace-ovi sa slike 6) pri čemu je njegov pristup ograničen isključivo na taj prostor imena, odnosno svaki kontejner nije uopšte svestan postojanja drugih kontejnera.
+![image-006](https://github.com/lukaDoric/SOA/assets/45179708/7657bc58-9b52-4e5e-a492-09839f6552e6)
 
-Međutim, iako imamo potpunu izolaciju, to nam nije skroz dovoljno. Kao i svaki multi-tenant sistem, uvek postoji opasnost od noisy neighbors-a, odnosno neophodan nam je mehanizam kojim ćemo ograničiti upotrebu resursa host OS-a od strane svih kontejnera, kako se ne bi desilo da jedan kontejner troši mnogo više resursa od drugih. To nam omogućava control groups (cgroups) kernel mehanizam.
+`Namespaces` nam omogućuju izolaciju, odnosno da podelimo naš operativni sistem na manje izolovanih virtuelnih operativnih sistema (kontejnera). Odnosno, kontejneri se ponašaju kao zasebni operativni sistemi (kao kod VM-a) samo što to nisu, jer svi dele isti kernel na host OS-u. Svaki kontejner ima sopstveni skup namespace-ova (kada pričamo o Linux-u to su namespace-ovi sa slike 6) pri čemu je njegov pristup ograničen isključivo na taj prostor imena, odnosno svaki kontejner nije uopšte svestan postojanja drugih kontejnera.
+
+![image-007](https://github.com/lukaDoric/SOA/assets/45179708/22ddf7dc-1f88-4fb6-8c50-09676f6b2bea)
+
+Međutim, iako imamo potpunu izolaciju, to nam nije skroz dovoljno. Kao i svaki multi-tenant sistem, uvek postoji opasnost od noisy neighbors-a, odnosno neophodan nam je mehanizam kojim ćemo ograničiti upotrebu resursa host OS-a od strane svih kontejnera, kako se ne bi desilo da jedan kontejner troši mnogo više resursa od drugih. To nam omogućava control groups (cgroups) kernel mehanizam (slika ispod).
+
+![image-008](https://github.com/lukaDoric/SOA/assets/45179708/a10e8547-435a-4f69-b962-8062c1431ee9)
 
 <h2>6. Kako raditi sa kontejnerima?</h2>
 
-Pre nego što bi mogli bilo šta da radimo sa kontejnerima neophodno je izvršiti instalaciju Docker CE-a (Community Edition). Kompletan guide za instalaciju za bilo koji operativni sistem (u primerima će biti korišćen Ubuntu) postoji u zvaničnoj dokumentaciji na sledećem linku: https://docs.docker.com/install/linux/docker-ce/ubuntu/.
+Pre nego što bi mogli bilo šta da radimo sa kontejnerima neophodno je izvršiti instalaciju Docker CE-a (Community Edition). Kompletan guide za instalaciju za bilo koji operativni sistem (u primerima će biti korišćen Ubuntu) postoji u zvaničnoj dokumentaciji na sledećem linku: [https://docs.docker.com/install/linux/docker-ce/ubuntu/](https://docs.docker.com/install/linux/docker-ce/ubuntu/).
 
 Nakon instalacije neophodno je proveriti da li je instalacija bila uspešna. U terminalu otkucati komandu: sudo docker info.
 
-Napomena: Ukoliko ne želite da izvršavate Docker naredbe sa povišenim privilegijama (da kucate sudo) onda je neophodno nakon instalacije ispratiti par koraka ispisanih u dokumentaciji: https://docs.docker.com/install/linux/linux-postinstall/.
+Napomena: Ukoliko ne želite da izvršavate Docker naredbe sa povišenim privilegijama (da kucate sudo) onda je neophodno nakon instalacije ispratiti par koraka ispisanih u dokumentaciji: [https://docs.docker.com/install/linux/linux-postinstall/](https://docs.docker.com/install/linux/linux-postinstall/).
 
-Ukoliko želimo da pokrenemo neki kontejner kucamo komandu: docker run naziv_slike. U konkretnom slučaju otkucaćemo: docker run -i -t ubuntu /bin/bash.
+![image-009](https://github.com/lukaDoric/SOA/assets/45179708/a42d97ba-ddcc-4d69-9243-3c4a009e64fb)
+
+Rezultat naredbe jesu informacije o broju kontejnera, broju slika, ​storage driver-​u i ostalim bazičnim konfiguracijama.
+
+Ukoliko želimo da pokrenemo neki kontejner kucamo komandu: docker run naziv_slike. U konkretnom slučaju otkucaćemo: `docker run -i -t ubuntu /bin/bash`
+
+![image-010](https://github.com/lukaDoric/SOA/assets/45179708/c5432343-f2df-4b8d-b66f-e308dff89090)
 
 Dakle, šta se najpre dogodilo? Docker nije uspeo da pronađe sliku sa datim nazivom na lokalnom računaru pa se obratio javnom registru (DockerHub-u) i krenuo da povlači poslednju stable verziju (označena tagom latest) slike. Rekli smo da se slike sastoje iz više layer-a pa je preuzeo svaki sloj (linije koje se završavaju sa Pull complete). Nakon preuzimanja pokrenuo je nov kontejner. Ovde smo dodali i dva flega prilikom pokretanja komande. Fleg -i i -t. Prvi naglašava da je neophodno održati standard input (STDIN) dok drugi fleg dodeljuje pseudo terminal (terminal koji ima funkcije kao i pravi fizički terminal). Nakon naziva slike zadali smo i komandu koja je pokrenula Linux shell pri čemu nam se pokretanje kontejnera prikazuje kao na slici.
 
 Kada pokrenemo top komandu unutar kontejnera vidimo da je to jedini proces koji je zapravo pokrenut u našem kontejneru.
 
-Sa komandom exit napuštamo kontejner i vraćamo se na glavni terminal. Ono što je bitno razumeti je da smo sa ovom komandom ugasili glavni proces kontejnera i samim tim smo ugasili i kontejner.
+![image-011](https://github.com/lukaDoric/SOA/assets/45179708/16a716ca-3dc6-4c08-a341-5b3244c5f764)
 
-Sa komandom docker ps smo zatražili izlistavanje svih pokrenutih kontejnera.
+Sa komandom `exit` napuštamo kontejner i vraćamo se na glavni terminal. Ono što je bitno razumeti je da smo sa ovom komandom ugasili glavni proces kontejnera i samim tim smo ugasili i kontejner.
+
+Sa komandom `docker ps` smo zatražili izlistavanje svih pokrenutih kontejnera.
+
+![image-012](https://github.com/lukaDoric/SOA/assets/45179708/169bb970-d413-4c2f-a028-6b18a831a2ab)
 
 S obzirom da smo sa exit ugasili glavni proces našeg kontejnera (samim tim i njega), prilikom izvršenja gorepomenute komande neće biti izlistane informacije o kontejneru. Dodavanjem flega -a izlistavamo i pokrenute i zaustavljene kontejnere dok sa flegom -l izlistavamo informacije o poslednjem kontejneru koji je bio pokrenut bez obzira da li je i dalje pokrenut ili je zaustavljen. Sa flegom -n x slična priča kao i sa -l, s tim što ovde eksplicitno naglašavamo za koliko kontejnera želimo da vidimo informacije. Konkretne stvari koje nam se prikazuju jesu:
 
-IMAGE - Slika od koje je kreiran kontejner.
-COMMAND - Izvršena komanda.
-STATUS - Status našeg kontejnera (koliko je dugo pokrenut/ugašen).
-PORTS - Izloženi portovi.
-NAMES - Naziv kontejnera (Ako nije eksplicitno zadat putem flega biće generisano ime).
+- **IMAGE** - Slika od koje je kreiran kontejner.
+- **COMMAND** - Izvršena komanda.
+- **STATUS** - Status našeg kontejnera (koliko je dugo pokrenut/ugašen).
+- **PORTS** - Izloženi portovi.
+- **NAMES** - Naziv kontejnera (Ako nije eksplicitno zadat putem flega biće generisano ime).
 Sa komandom docker images izlistavamo informacije o svim preuzetim i kreiranim slikama.
 
 Informacije koje nam se prikazuju su:
