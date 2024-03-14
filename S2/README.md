@@ -1,0 +1,202 @@
+Docker
+
+1. Motivacija
+
+Sa pojavom virtuelnih mašina (VM) omogućeno je izbegavanje situacija gde se fizički serveri koriste na takav način da je iskoristivost resursa vrlo mala što je u prošlosti često bio slučaj (iskoristivost resursa često bude od 10-20%). Virtuelne mašine su apstrakcija fizičkog hardvera koje omogućuju pretvaranje jednog servera u više manjih servera. Svaka VM-a uključuje punu kopiju operativnog sistema, aplikacije, biblioteke pri čemu se ispod njih nalazi hypervisor odnosno softver koji omogućuje kreiranje, pokretanje i izvršavanje više VM-a na jednom fizičkom računaru (type 1 i type 2 hypervisor) i omogućuje deljenje fizičkih resursa (memoriju, procesor) između njih. Dakle, virtuelne mašine (virtuelni serveri) su jeftiniji od fizičkih servera s obzirom da troše deo resursa istog. Pored manje cene omogućuju lakše upravljanje, bolje skaliranje, konzistentno okruženje za izvršavanje aplikacija što ih čini odličnom podlogom za pružanje usluga web servisa.
+
+Sa pojavom virtuelnih mašina, svet je postao bolje mesto, ali i dalje je bilo prostora za napredak. Ono što je negativna strana VM-a jeste da svaka zahteva underlying OS što znači da će se deo resursa koristiti za podizanje i izvršavanje operativnog sistema. Takođe, operativni sistemi uključuju potencijalni overhead u obliku dodatnih potreba za licencama, potreba za administracijom (updates, patches) itd.
+
+Virtuelne mašine vs kontejneri
+
+Ovi nedostaci su u priču uključili kontejnere. Za razliku od virtuelnih mašina gde svaka ima sopstveni OS i oslanja se na hypervisor, kontejneri se oslanjaju na jedan host OS i dele njegove funkcije kernela (takođe i binaries, libraries itd.) i samim tim su lakši (lightweight) i u priličnoj meri se smanjuje overhead koji donose VM-e. Kontejnerske tehnologije su bile prisutne duže vremena ali nisu bile previše popularne jer je kreiranje i upravljanje kontejnerima bilo dosta kompleksno ali je Docker uspeo to da promeni.
+
+2. Šta je Docker i koje su njegove komponente?
+
+Docker je open-source platforma koja automatizuje proces deployment-a aplikacija u softverske kontejnere. On dodaje application deployment engine na vrh virtuelized container execution environment-a pri čemu je dizajniran tako da omogući lagano i brzo okruženje za izvršavanje naših aplikacija kao i izuzetno lako premeštanje aplikacija iz jednog okruženja u drugo (test -> production).
+
+Njegove osnovne komponente su:
+
+Docker Engine
+Docker Images
+Registries (Docker Hub)
+Docker containers
+Docker Swarm
+
+Kada pričamo o Docker Engine-u, govorimo o klasičnoj klijent-server aplikaciji. Docker klijent nam pruža CLI (command line interface) putem kojeg unosimo komande na osnovu kojih se generišu API request-ovi koji se šalju serveru (Docker daemon-u) koji ih obrađuje. Sam Docker daemon je nakon refaktorisanja (zbog toga što je narastao u jedan veliki monolit) ostao bez ikakvog koda koji zaista kreira i pokreće kontejnere. On se obraća putem gRPC API-a preko lokalnog Linux socket-a containerd-u (long running daemon-u) koji predstavlja "API fasadu" koja omogućuje startovanje containerd-shim-a odnosno roditeljskog procesa za svaki kontejner gde runc (container runtime) vrši kreiranje kontejnera. Sloj ispod containerd-a vrši kompletan rad sa kernelom odnosno koristi njegove funkcije. Iako arhitektura izgleda prilično kompleksno, ovakva podela omogućuje da se pojedine komponente bez ikakvih problema zamenjuju a da to ne utiče na pokrenute kontejnere što sa administratorske tačke gledišta puno olakšava stvari. Na primer, moguće je promeniti verziju Docker-a a da se pri tome ne moraju zaustavljati već pokrenuti kontejneri.
+
+3. Šta su Docker slike?
+
+Generalno je poznat koncept slike kada je priča o virtuelnim mašinama. Za sličnu stvar se koriste i Docker slike, odnosno predstavljaju build-time konstrukt od kojih nastaju kontejneri, ali se tu sličnost završava. Docker slike predstavljaju skup read-only layer-a gde svaki sloj predstavlja različitosti u fajlsistemu u odnosu na prethodni sloj, pri čemu uvek postoji jedan bazni (base) sloj. Upotrebom storage driver-a skup svih slojeva čini root filesystem kontejnera, odnosno svi slojevi izgledaju kao jedan unificirani fajlsistem.
+
+Svi ovi read-only slojevi predstavljaju osnovu za svaki kontejner koji se pokreće i ne mogu se menjati. Prilikom pokretanja svakog kontejnera, Docker dodaje još jedan sloj koji je read-write tipa i u koji se upisuju nove datoteke i sve izmene. Ukoliko želimo da menjamo neki fajl koji se nalazi u nekom read-only sloju, taj fajl će biti kopiran u read-write sloj, biće izmenjen i kao takav dalje korišćen. Originalna verzija će i dalje postojati (nepromenjena), ali nalaziće se "skrivena" ispod nove verzije.
+
+Ovakav mehanizam se zove Copy-on-write i delom čini Docker zaista moćnim. Koliko god kontejnera da kreiramo, read-only slojevi će uvek biti isti, tj. ostaće nepromenjeni, samo će svaki kontejner dobiti sopstveni read-write sloj. Na ovaj način se štedi jako puno prostora na disku jer kada smo jednom preuzeli/kreirali sliku, koliko god kontejnera da pokrenemo, slika ostaje apsolutno nepromenjena.
+
+4. Odakle se preuzimaju postojeće slike?
+
+Docker čuva slike u registrima, pri čemu postoje dva tipa odnosno javni i privatni. Javni registar kojim upravlja Docker Inc. se zove DockerHub i na njemu svako može da napravi nalog i da tamo čuva i deli sopstvene slike. Postoje dva tipa slika a to su oficijelne koje žive na top nivou DockerHub namespace-a (npr. Ubuntu, Redis itd.) i neoficijelne (korisničke). Takođe je moguće napraviti privatni registar u kome se mogu čuvati slike i sve to sakriti iza firewall-a što je ponekad neophodno za pojedine organizacije.
+
+Postojeći Docker registri nude mesto gde korisnici mogu da preuzmu već postojeće slike koje su kreirali drugi korisnici ili organizacije. Ovo omogućava brzo deljenje i razvoj aplikacija, jer korisnici mogu da iskoriste prethodno kreirane slike kao osnovu za svoje aplikacije ili da jednostavno pokrenu servise potrebne za svoje aplikacije bez potrebe da sami kreiraju sve od početka. Oficijelne slike na DockerHub-u su verifikovane i pružaju siguran temelj za izgradnju kontejnerizovanih aplikacija, dok neoficijelne slike pružaju širok spektar alata i aplikacija koje je zajednica razvila.
+
+5. Šta predstavljaju kontejneri?
+
+Kako slike predstavljaju build-time konstrukt, tako su kontejneri run-time konstrukt. Gruba analogija odnosa između slike i kontejnera se može posmatrati kao klasa i instanca te klase. Kontejneri predstavljaju lightweight execution environment koji omogućuju izolovanje aplikacije i njenih zavisnosti koristeći kernel namespaces i cgroups mehanizme.
+
+Namespaces nam omogućuju izolaciju, odnosno da podelimo naš operativni sistem na manje izolovanih virtuelnih operativnih sistema (kontejnera). Odnosno, kontejneri smells-and-feels kao zasebni operativni sistemi (kao slučaj kod VM-a) samo što to nisu, jer svi dele isti kernel na host OS-u. Svaki kontejner ima sopstveni skup namespace-ova (kada pričamo o Linux-u to su namespace-ovi sa slike 6) pri čemu je njegov pristup ograničen isključivo na taj prostor imena, odnosno svaki kontejner nije uopšte svestan postojanja drugih kontejnera.
+
+Međutim, iako imamo potpunu izolaciju, to nam nije skroz dovoljno. Kao i svaki multi-tenant sistem, uvek postoji opasnost od noisy neighbors-a, odnosno neophodan nam je mehanizam kojim ćemo ograničiti upotrebu resursa host OS-a od strane svih kontejnera, kako se ne bi desilo da jedan kontejner troši mnogo više resursa od drugih. To nam omogućava control groups (cgroups) kernel mehanizam.
+
+6. Kako raditi sa kontejnerima?
+
+Pre nego što bi mogli bilo šta da radimo sa kontejnerima neophodno je izvršiti instalaciju Docker CE-a (Community Edition). Kompletan guide za instalaciju za bilo koji operativni sistem (u primerima će biti korišćen Ubuntu) postoji u zvaničnoj dokumentaciji na sledećem linku: https://docs.docker.com/install/linux/docker-ce/ubuntu/.
+
+Nakon instalacije neophodno je proveriti da li je instalacija bila uspešna. U terminalu otkucati komandu: sudo docker info.
+
+Napomena: Ukoliko ne želite da izvršavate Docker naredbe sa povišenim privilegijama (da kucate sudo) onda je neophodno nakon instalacije ispratiti par koraka ispisanih u dokumentaciji: https://docs.docker.com/install/linux/linux-postinstall/.
+
+Ukoliko želimo da pokrenemo neki kontejner kucamo komandu: docker run naziv_slike. U konkretnom slučaju otkucaćemo: docker run -i -t ubuntu /bin/bash.
+
+Dakle, šta se najpre dogodilo? Docker nije uspeo da pronađe sliku sa datim nazivom na lokalnom računaru pa se obratio javnom registru (DockerHub-u) i krenuo da povlači poslednju stable verziju (označena tagom latest) slike. Rekli smo da se slike sastoje iz više layer-a pa je preuzeo svaki sloj (linije koje se završavaju sa Pull complete). Nakon preuzimanja pokrenuo je nov kontejner. Ovde smo dodali i dva flega prilikom pokretanja komande. Fleg -i i -t. Prvi naglašava da je neophodno održati standard input (STDIN) dok drugi fleg dodeljuje pseudo terminal (terminal koji ima funkcije kao i pravi fizički terminal). Nakon naziva slike zadali smo i komandu koja je pokrenula Linux shell pri čemu nam se pokretanje kontejnera prikazuje kao na slici.
+
+Kada pokrenemo top komandu unutar kontejnera vidimo da je to jedini proces koji je zapravo pokrenut u našem kontejneru.
+
+Sa komandom exit napuštamo kontejner i vraćamo se na glavni terminal. Ono što je bitno razumeti je da smo sa ovom komandom ugasili glavni proces kontejnera i samim tim smo ugasili i kontejner.
+
+Sa komandom docker ps smo zatražili izlistavanje svih pokrenutih kontejnera.
+
+S obzirom da smo sa exit ugasili glavni proces našeg kontejnera (samim tim i njega), prilikom izvršenja gorepomenute komande neće biti izlistane informacije o kontejneru. Dodavanjem flega -a izlistavamo i pokrenute i zaustavljene kontejnere dok sa flegom -l izlistavamo informacije o poslednjem kontejneru koji je bio pokrenut bez obzira da li je i dalje pokrenut ili je zaustavljen. Sa flegom -n x slična priča kao i sa -l, s tim što ovde eksplicitno naglašavamo za koliko kontejnera želimo da vidimo informacije. Konkretne stvari koje nam se prikazuju jesu:
+
+IMAGE - Slika od koje je kreiran kontejner.
+COMMAND - Izvršena komanda.
+STATUS - Status našeg kontejnera (koliko je dugo pokrenut/ugašen).
+PORTS - Izloženi portovi.
+NAMES - Naziv kontejnera (Ako nije eksplicitno zadat putem flega biće generisano ime).
+Sa komandom docker images izlistavamo informacije o svim preuzetim i kreiranim slikama.
+
+Informacije koje nam se prikazuju su:
+
+REPOSITORY - Repozitorijum sa koje je slika preuzeta.
+TAG - Oznaka koja najčešće ima za ulogu da prikaže verziju slike (npr. za Ubuntu je to 18.04/18.10 itd.). Ukoliko ne naglasimo koji tag želimo, biće preuzeta poslednja stable verzija slike.
+IMAGE ID - Identifikator slike.
+CREATED - Kada je slika kreirana.
+SIZE - Veličina slike.
+Sa komandom docker run smo istovremeno preuzeli sliku i odmah pokrenuli kontejner od nje. Možemo izvršiti i samo preuzimanje slike bez naknadnog pokretanja putem komande docker pull naziv_slike:tag.
+
+U konkretnom slučaju preuzeli smo Fedora sliku gde smo sa tagom naznačili verziju 20.
+
+Neke od vrlo korisnih komandi:
+
+docker rm naziv_kontejnera (dodatno fleg -f za brisanje kontejnera koji je pokrenut. Umesto naziva se može koristiti i id).
+docker start naziv_kontejnera (pokretanje kontejnera sa zadatim nazivom; može se koristiti i id).
+docker stop naziv_kontejnera (zaustavljanje kontejnera sa zadatim nazivom; može se koristiti i id).
+docker exec (omogućuje izvršavanje komandi unutar kontejnera).
+docker rmi naziv_slike (omogućuje brisanje slike po nazivu).
+Postoji naravno još komandi i puno dodatnih flegova za svaku komandu, i dodatne informacije o svakoj se mogu naći u odličnoj zvaničnoj dokumentaciji: https://docs.docker.com/engine/reference/commandline/docker/
+
+7. Kako kreirati sopstvene slike?
+
+Videli smo kako da pokrenemo kontejnere na osnovu već postojećih slika, ali ono što nas konkretno interesuje jeste kako da kreiramo sopstvene slike i da pomoću njih pokrenemo naše kontejnere u kojima će se izvršavati neki konkretan mikroservis (u primeru neka Spring-Boot aplikacija). Za potrebe kreiranja naše slike neophodno je da kreiramo Dockerfile (sa tim nazivom) odnosno tekstualnu datoteku (najbolja praksa je da se ona nalazi u root direktorijumu projekta) koja koristi bazični DSL sa instrukcijama za kreiranje slika. Kada kreiramo taj fajl, komandom docker image build ćemo kreirati našu sliku izvršavanjem instrukcija koje smo napisali, i zatim ćemo od te slike startovati kontejner.
+
+Format je relativno jednostavan, i instrukcije koje postoje su:
+
+FROM - Pomoću ove instrukcije definišemo koja je bazna slika za predstojeće instrukcije koje će biti izvršene. Svaki fajl mora početi FROM instrukcijom, s tim što je moguće imati više FROM instrukcija u istom Dockerfile-u. Bazična slika bi trebala da bude oficijelna i po potrebi sa latest tagom jer su te slike proverene.
+ADD - Ova instrukcija kopira fajlove sa zadate destinacije u fajlsistem slike na odredišnoj destinaciji (biće dodat novi sloj u slici).
+RUN - Omogućuje izvršavanje komande pri čemu će rezultat biti novi sloj (layer) u samoj slici.
+COPY - Slično kao i ADD instrukcija, s tim što ADD omogućuje da source bude i URL, dok COPY zahteva fizičku putanju na disku (biće dodat novi sloj u slici).
+WORKDIR - Postavlja putanju odakle će pojedine komande biti izvršene.
+EXPOSE - Definišemo port kako bi mogli da odradimo mapiranje portova da bi kontejneri mogli da komuniciraju sa spoljašnjim svetom.
+ENTRYPOINT - Postavljamo executable koji će biti pokrenut sa pokretanjem kontejnera.
+ENV - Podešavanje environment varijabli.
+LABEL - Dodaje metapodatke slike poput verzije, maintainer itd.
+Postoji još instrukcija koje se mogu definisati u Dockerfile-u i više informacija o njima kao i o formatu argumenata instrukcija možete naći u zvaničnoj dokumentaciji: https://docs.docker.com/engine/reference/builder/. Takođe, preporuke koje diktira najbolja praksa možete naći u zvaničnoj dokumentaciji: https://docs.docker.com/develop/develop-images/dockerfile_best-practices/.
+
+Dakle, tok koji treba ispoštovati je pisanje koda, pa kad s tim završimo, kreiramo Dockerfile, pokrećemo docker image build kako bi kreirali sliku, i zatim startujemo kontejner na osnovu slike koju smo kreirali.
+
+Kreiranje Dockerfile-a i build-ovanje slike biće ilustrovano na Spring-boot aplikaciji iz materijala (folder first-app).
+
+U samom Dockerfile-u definisali smo 5 instrukcija:
+
+Sa prvom instrukcijom smo rekli šta je bazna slika. U ovom slučaju smo izabrali oficijelnu sliku koja se oslanja na Alpine Linux, koji dolazi sa instaliranim JDK-om i verzije 8.
+Sa drugom instrukcijom smo zadali metapodatke koje se odnose na kreatora i održavaoca slike.
+EXPOSE-ujemo još port na kom aplikacija sluša unutar kontejnera.
+WORKDIR podešava trenutni radni direktorijum unutar kontejnera na /app.
+COPY instrukcija vrši kopiranje servers.jar fajla sa host fajl sistema u trenutni radni direktorijum unutar kontejnera (odnosno kopira u /app direktorijum).
+CMD instrukcija navodi šta će biti executable i šta će biti pokrenuto sa samim pokretanjem kontejnera.
+Kada smo kreirali Dockerfile, pozicioniramo se u korenski direktorijum konkretne aplikacije i izvršimo komandu docker image build -t first-app .. Sa flegom -t definišemo naziv naše slike (potencijalno možemo dodati i tag, ali ako ga ne dodamo biće latest) i sa tačkom . definišemo šta je build context odnosno lokaciju našeg izvornog koda. Ako smo pozicionirani u korenskom direktorijumu aplikacije, onda je lokacija tekući direktorijum. Rezultat izvršavanja komande je prikazan u pratećoj slici.
+
+Ukoliko ukucamo komandu docker images, kreirana slika će nam biti prikazana kao i sve ostale preuzete slike.
+
+S obzirom na to da aplikacija skladišti podatke u MySQL bazu, neophodno je pokrenuti MySQL bazu. Da bismo uspešno realizovali komunikaciju između baze i aplikacije, poželjno je da se nalaze unutar iste mreže.
+
+Kreirati novu mrežu pod nazivom first-network:
+
+docker network create first-network
+
+Pokrenuti MySQL kontejner i dodati kontejner u first-network mrežu (sve ovo je jedna komanda):
+
+docker run -d --network first-network --name mysql -e MYSQL_ROOT_PASSWORD=password -e MYSQL_USER=sa -e MYSQL_PASSWORD=zgadija -e MYSQL_DATABASE=servers mysql:8.0.19
+
+Nakon izvršene komande sačekati par minuta da se baza podigne.
+Pokrenuti kontejner Spring-Boot aplikacije i dodati kontejner u first-network mrežu (sa -p flegom kažemo da mapiramo port iz kontejnera na port na hostu):
+
+docker run -it --network first-network --name app -p 8089:8080 -e DATABASE_USERNAME=sa -e DATABASE_PASSWORD=zgadija -e DATABASE_DOMAIN=mysql -e DATABASE_PORT=3306 first-app
+
+(Nakon izvršene komande treba da se dobije rezultat kao na sledećoj slici)
+
+Zatim je potrebno pomoću browsera pristupiti na adresu localhost:8089 kako pristupili aplikaciji. Slika ispod prikazuje aplikaciju nakon uspešnog dodavanja novog servera.
+
+U zavisnosti od potrebe, nekad je neophodno kreirati više ​Dockerfile-​a, odnosno više slika za različite faze razvoja aplikacije. Jedna varijanta jeste da svaki ​Dockerfile s​e nalazi u zasebnom direktorijumu. Drugi način jeste zadavanje drugačijeg imena/ekstenzije. Primer ​Dockerfile.dev, Dockerfile.test i​td. Voditi računa prilikom build-​a, da ne bi došlo do konkretnih problema, odnosno iskoristiti fleg -​f/​-​file i​zadati naziv konkretnog ​Dockerfile-​a.
+Napredne stvari:
+
+● [Multi-stage build](https://docs.docker.com/develop/develop-images/multistage-build/)
+● [Kreiranje base slike](https://docs.docker.com/develop/develop-images/baseimages/)
+
+8. Docker volumes?
+
+U poglavlju u kome su opisivane slike, bilo je reči o r​ead-only s​lojevima i read-write sloju koji se dodaju iznad prethodnih slojeva za svaki kontejner koji je pokrenut. Sve promene i sav sadržaj se upisuju u taj sloj. Problem sa tim jeste da kada se kontejner obrise, promene će biti potpuno izgubljene.
+Zatoje​Docker​uveonovkonceptpodnazivom​volumes.D​abimoglidačuvamo konkretan sadržaj (​persist)​, i po potrebi ga delimo između različitih kontejnera, kreiramo poseban ​volume koji je prosto rečeno, ništa drugo do skup direktorijuma/fajlova koji se
+  
+nalaze izvan ​default-​nog ​UFS-​a i koji naravno postoje kao direktorijumi/fajlovi na host fajlsistemu.
+Kreiranje ​volume-​a je moguće odraditi sa komandom ​docker volume create naziv.​​Mount​-ovanje se radi prilikom pokretanja sa flegom -​-volume i​li -​v.​Primer: ​docker run -i -t -v primer1:/nekiPodaci ubuntu /bin/bash.​Dakle najobičnija komanda (koju smo već videli), proširena flegom -​v ​gde smo zadali naziv ​volume-​a i gde će biti izvršeno mount-​ovanje u okviru samog kontejnera.
+
+Na slici je prikazano najpre kreiranje ​volume-​a, a zatim je pokrenut kontejner kome smo ​mount​-ovali prethodno kreirani ​volume na putanji ​nekiPodaci.​U okviru prvog kontejnera smo i kreirali običan tekstualni fajl. Zatim smo izvršili ​exit (​ugasili glavni proces /​bin/bash ​i samim tim i ugasili kontejner) i pokrenuli nov kontejner kome smo takođe ​mount​-ovali isti ​volume na istoj putanji (apsolutno ne mora biti ista) i kada smo ušli u sam folder, datoteka koju smo prethodno kreirali iz totalno drugog kontejnera i dalje postoji.
+
+9. Šta raditi sa ostalim mikroservisima?
+U prethodnom poglavljima je objašnjena manipulacija ​volume-​a, kako kreirati sopstvenu sliku i kako od nje kreirati kontejner. Međutim, postavlja se pitanje šta raditi ukoliko imamo više aplikacija, od kojih je neke neophodno pokrenuti u više instanci (kontejnera), koji moraju da komuniciraju međusobno. Tada posao pojedinačnog kreiranja slika i pokretanja kontejnera nije baš idealan. Zato se koristi alat docker-compose ​koji nam značajno olakšava stvari po tom pitanju. Omogućuje nam
+ 
+pokretanje i zaustavljanje ​stack-​a aplikacija, kao i zejdnički ispis logova svih aplikacija na jedan pseudo terminal.
+Sve što je neophodno jeste da se instalira alat (uputstvo dostupno u dokumentaciji ​https://docs.docker.com/compose/install/)​ i da kreiramo fajl pod nazivom docker-compose.yml.​ Na slici je prikazan deo iz docker-compose.yml fajla koji se nalazi ununar ​demo​direktorijuma.
+
+U fajlu za konkretan primer je definisano više direktiva:
+1. version -​ Ovde naglašavamo koju verziju formata želimo da koristimo. Ovo polje
+je uvek neophodno i dovoljno je navesti verziju 3 (poslednja verzija formata).
+2. services - U ovoj sekciji se definiše niz objekata gde svaki predstavlja servis, odnosno kontejner i takođe ova sekcija je obavezna. Dalje unutar servisa
+definišemo:
+1. build -​ ​Ova direktiva ako je definisana, govori da je neophodno kreirati
+slike pri čemu se definišu odnosno putanja do direktorijuma na kojoj se
+nalazi Dockerfile.​
+2. image​-​ Definiše naziv slika koja će nastati prilikom ​build​-ovanja.
+3. container-name​-​ Definiše naziv kontejnera koji će biti pokrenut.
+4. restart​- Definiše pod kojim okolnostima kontejner treba restartovati
+5. networks​- definiše mrežu (mreže) u kojoj kontejner treba da se nalazi.
+6. ports​-​ Vrši se mapiranje portova.
+7. environments - Postavlja vrednost environment varijable koje se nalaze u
+kontejneru.
+8. volumes​- Definiše volume za koje se kontejner kači.
+9. depends_on -​ Govori prilikom pokretanja servisa koje su zavisnosti
+između njih, odnosno koji servisi moraju biti pokrenuti pre nego što se pokrene konkretan servis.
+Za dodatne direktive i njihove vrednosti možete pogledati u zvaničnoj dokumentaciji ​https://docs.docker.com/compose/.​
+Pozicioniramo se na putanju do direktorijuma u kojem se nalazi docker-compose.yml i pozovemo naredbu: ​docker-compose up --build .​ Sa ovim pokrećemo sve naše servise (kontejnere). Rezultat izvršavanja ​docker-compose naredbe nam je u pseudo terminalu spojio logove sa svih pokrenutih servisa.
+
+10. Docker Swarm
+Docker ​Swarm je alat koji omogućava orkestraciju nad kontejnerima. ​Docker Swarm​-a ima implementiran l​oad balancer ​i ​discovery service, ​servisi koji su neophodni u mikroservisnoj arhitekturi. Za aktiviranje ​Docker Swarm-​a neophodno je podesit ​Docker da radi u ​swarm režimu komandom: ​docker swarm init .​ Za pokretanje prethodnog primera pomoću ​Docker Swarm-​a, neophodne je dopuniti određene stvari u docker-compose.yml fajlu. Na slici je prikazan deo ​stack-file.yml fajla koji se nalazi u unutar ​demo​direktorijuma
+
+U fajlu je dodata ​deploy​sekcija koja govori kako treba da se uradi ​deployment​servisa:
+1. replicas​- koliko instaci kontejnera treba da bude aktivno
+2. parallelism​i ​delay​- ukoliko broj aktivnih kontejnera manji od specifiranog, ​Docker
+pokreće nove instance kontejnera dok ne postigne željeni broj. Ova sekcija definiše kako je to potrebno postići. Na primer ukoliko definišemo r​eplicas​: 10, parallelism:2 i delay: 10s, u slučaju da su pali svih 10 kontejnera, ​Docker​će istovremeno podizati 2 kontejnera pri čemu će nakog uspešnog podizanja oba kontejnera sačekati 10 sekundi i opet pokušavati da podigne istovremeno 2 kontejnera. Ovaj proces se ponavlja sve dok se ne postigne željeni broj instanci kontejnera.
+3. restart_policy​- definiše pod kojim okolnostima je neophodno podizati nove kontejnere.
+Pokretanje se vrši pomoću naredne komande (​demo​predstavlja naziv ​stack-​a koji može biti proizvoljan, dok -​c f​lagom definišemo putanju do ​yml ​fajla):
+docker stack deploy -c stack-file.yml demo
+Za praćenje stanja servisa neophodne je izvršiti narednu komandu:
+docker stack services demo
