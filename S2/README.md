@@ -1,5 +1,31 @@
 <h1>Docker</h1>
 
+<h2>Video materijal koji prati ovu lekciju:</h2>
+
+[Virtualne mašine](https://youtu.be/xxC2yAfamSM)
+
+[Mane virtualnig mašina](https://youtu.be/MbVYKEUDab0)
+
+[Linux cgroups & namespaces](https://youtu.be/Mby8-4twxNY)
+
+[Uvod u Docker](https://youtu.be/MAivaLjKDaY)
+
+[Interna arhitektura Docker-a](https://youtu.be/nat6d-kNTGU)
+
+[Uvod u Docker slike](https://youtu.be/LsjntJHEe_8)
+
+[Prva Docker slika](https://youtu.be/xfuSdAcusfw)
+
+[Docker slika za servis i bazu podataka](https://youtu.be/8cyjjYR6LzY)
+
+[Pravilan redosled komandi prilikom definisanja Docker slike](https://youtu.be/bogpeVjMIKE)
+
+[Multistage build](https://youtu.be/_EYy81VGrJ0)
+
+[docker compose](https://youtu.be/LnP4ibmKhIg)
+
+[Primer docker-compose.yaml sa više servisa i env varijablama](https://youtu.be/gtnnIr3aET4)
+
 <h2>1. Motivacija</h2>
 
 Sa pojavom virtuelnih mašina (VM) omogućeno je izbegavanje situacija gde se fizički serveri koriste na takav način da je iskoristivost resursa vrlo mala što je u prošlosti često bio slučaj (iskoristivost resursa često bude od 10-20%). Virtuelne mašine su apstrakcija fizičkog hardvera koje omogućuju pretvaranje jednog servera u više manjih servera. Svaka VM-a uključuje punu kopiju operativnog sistema, aplikacije, biblioteke pri čemu se ispod njih nalazi hypervisor odnosno softver koji omogućuje kreiranje, pokretanje i izvršavanje više VM-a na jednom fizičkom računaru (type 1 i type 2 hypervisor) i omogućuje deljenje fizičkih resursa (memoriju, procesor) između njih. Dakle, virtuelne mašine (virtuelni serveri) su jeftiniji od fizičkih servera s obzirom da troše deo resursa istog. Pored manje cene omogućuju lakše upravljanje, bolje skaliranje, konzistentno okruženje za izvršavanje aplikacija što ih čini odličnom podlogom za pružanje usluga web servisa.
@@ -11,6 +37,13 @@ Virtuelne mašine vs kontejneri:
 ![0](https://github.com/lukaDoric/SOA/assets/45179708/2b0a77cf-7431-4558-984e-ec9b95dd8397)
 
 Ovi nedostaci su u priču uključili kontejnere. Za razliku od virtuelnih mašina gde svaka ima sopstveni OS i oslanja se na hypervisor, kontejneri se oslanjaju na jedan host OS i dele njegove funkcije kernela (takođe i binaries, libraries itd.) i samim tim su lakši (lightweight) i u priličnoj meri se smanjuje overhead koji donose VM-e. Kontejnerske tehnologije su bile prisutne duže vremena ali nisu bile previše popularne jer je kreiranje i upravljanje kontejnerima bilo dosta kompleksno ali je Docker uspeo to da promeni.
+
+### Instalacija Docker-a
+
+Detaljna uputstva za instaliranje Docker-a:
+- [Linux](https://docs.docker.com/engine/install/ubuntu/)
+- [Windows](https://docs.docker.com/desktop/install/windows-install/) (Nepohodno je da imate instaliran WSL 2, što bi trebalo da se nalazi na svim verizijama Windows 10 i 11)
+- [Mac](https://docs.docker.com/desktop/install/mac-install/) Obratite pažnju ako imate nove računare sa Apple čipovima. Dosta docker slika ne radi kako treba na ARM arhitekturi.
 
 <h2>2. Šta je Docker i koje su njegove komponente?</h2>
 
