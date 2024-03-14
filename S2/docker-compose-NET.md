@@ -111,6 +111,61 @@ Drugi deo docker-compose.yml fajla je zadužen za pokretanje kontejnera baze.
    
 Do kraja se definišu volume-i za bazu i konfiguriše mreža.
 
+## Pokretanje monolitne aplikacije
+
+Komandom docker-compose up u okviru tourism-be foldera ćemo podići svu potrebnu infrastrukturu dakle bekend (monolit) i bazu. Nakon pokretanja komandi potrebno je sačekati neko vreme da svi servisi budu dostupni. Komandom docker ps u terminalu možemo videti pokrenute kontejnere, a možemo ih videti i na docker desktop-u.
+
+![image](https://github.com/lukaDoric/SOA/assets/57589408/5fed68d8-e5c6-4f27-9dd1-61242ce1b5c7)
+  
+Potom je potrebno pokrenuti komandu docker-compose -f docker-compose-migration.yml up kako bi migrirali podatke (ispratiti u konzoli da su sve migracije prošle). Nakon toga možemo se zakačiti na postgres kontejner da vidimo da li su tu sve tabele koje bi trebale da budu. Komanda je docker exec -it <ID-KONTEJNERA-ZA-BAZU> bash.  
+
+![image](https://github.com/lukaDoric/SOA/assets/57589408/4c3deff8-1d15-420b-91c8-573dba8982fc)  
+
+Potom se možemo ulogovati u bazu. Komanda je psql -U postgres. Nakon toga možemo izlistati sve baze koje imamo, komanda je \l.  
+
+![image](https://github.com/lukaDoric/SOA/assets/57589408/d796672e-1dc8-4b81-bf38-e480d218ec1b)  
+
+Potom se možemo nakačiti na posebnu bazu pa i na posebnu šemu i proveriti da li su tu tabele. Komanda za kačenje na bazu je \c <IME-BAZE>  
+
+![image](https://github.com/lukaDoric/SOA/assets/57589408/6c42e006-0b60-4893-a9fb-6b8a72241db7)  
+
+Sada možemo izlistati sve šeme komandom \dn  
+
+![image](https://github.com/lukaDoric/SOA/assets/57589408/19d9b722-bccf-41f1-96f0-84c3f129a7a9)  
+
+Na kraju možemo videti sve tabele u okviru šeme komandom \dt stakeholders.*  
+
+![image](https://github.com/lukaDoric/SOA/assets/57589408/ebb46bcd-27a6-4c0f-b3a7-cc22d76fceea)  
+
+Kada smo utvrdili da se sve uspešno migriralo možemo probati da pristupimo aplikaciji tako što u browser-u pristupimo http://localhost:8080/swagger/index.html. Obrati pažnju da je u ovom primeru .NET aplikacije obrisan deo iz konfiguracije projekta tj. sledeći if
+```code
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI();
+}
+```
+kako bi nam se swagger pokrenuo i u produkcionom okruženju.  
+
+Na kraju možemo popuniti bazu podacima komandom docker exec -it <ID-KONTEJNERA-ZA-BAZU> psql -U postgres -d explorer -f /tmp/explorer-init.sql  
+
+![image](https://github.com/lukaDoric/SOA/assets/57589408/d0856479-6c94-4711-abdb-cedf487ff09d)  
+
+Aplikacija je sada dokerizovana, uvezana na bazu i baza je popunjena osnovnim informacijama. Sada je moguće kontaktirati aplikaciju i sa frontend-a, obrati pažnju na putanju koju gaćaš i da je http umesto https (jer nismo u ovom pirmeru podešavali https).
+
+## Zaustavljanje aplikacije
+
+Na kraju možeš sve zaustaviti komandom <b>docker compose down</b>, ukoliko želiš da obrišeš sve zaustavljene kontejnere možeš pokrenuti <b>docker system prune -a</b>, a za čišćenje volume-a možeš pokrenuti <b>docker volume prune</b>
+
+
+
+
+
+
+
+
+
+
 
 
 
