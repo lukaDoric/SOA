@@ -1,6 +1,6 @@
 # Docker - ASP .NET Core
 
-Naredni primer predstavlja jedan pokretanje jedne kompleksnije ASP .NET Core  aplikacije i sadrži stage za pokretanje aplikacije i stage migraciju podataka. Primer uključuje u sebe jedan <b>Dockerfile</b> za .NET aplikaciju, <b>docker-compose.yml</b> koji pokreće Dockerfile zajedno sa bazom (kontejnerom za posgresqll), i na kraju <b>docker-compose-migration.yml</b> zadužen za migracije (jer u okviru .NET projekta ne radimo migracije automatski na pokretanje aplikacije).  
+Naredni primer predstavlja pokretanje jedne kompleksnije ASP .NET Core  aplikacije. Primer uključuje u sebe jedan <b>Dockerfile</b> za .NET aplikaciju, <b>docker-compose.yml</b> koji pokreće Dockerfile zajedno sa bazom (kontejnerom za postgresql), i na kraju <b>docker-compose-migration.yml</b> zadužen za migracije (jer u okviru .NET projekta ne radimo migracije automatski na pokretanje aplikacije).  
 
 Možeš preuzeti sledeći <a href='#'>primer</a> i analizirati sledeće fajlove - Dockerfile, docker-compose.yml, docker-compose-migration.yml.  
 
