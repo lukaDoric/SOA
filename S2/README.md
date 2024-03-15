@@ -104,25 +104,25 @@ Nakon instalacije neophodno je proveriti da li je instalacija bila uspešna. U t
 
 Napomena: Ukoliko ne želite da izvršavate Docker naredbe sa povišenim privilegijama (da kucate sudo) onda je neophodno nakon instalacije ispratiti par koraka ispisanih u dokumentaciji: [https://docs.docker.com/install/linux/linux-postinstall/](https://docs.docker.com/install/linux/linux-postinstall/).
 
-![image-009](https://github.com/lukaDoric/SOA/assets/45179708/a42d97ba-ddcc-4d69-9243-3c4a009e64fb)
+<img width="1512" alt="Screenshot 2024-03-15 at 12 37 22" src="https://github.com/lukaDoric/SOA/assets/45179708/669e684d-82a1-4be6-b602-7ecdeadea975">
 
 Rezultat naredbe jesu informacije o broju kontejnera, broju slika, ​storage driver-​u i ostalim bazičnim konfiguracijama.
 
 Ukoliko želimo da pokrenemo neki kontejner kucamo komandu: docker run naziv_slike. U konkretnom slučaju otkucaćemo: `docker run -i -t ubuntu /bin/bash`
 
-![image-010](https://github.com/lukaDoric/SOA/assets/45179708/c5432343-f2df-4b8d-b66f-e308dff89090)
+<img width="861" alt="Screenshot 2024-03-15 at 12 39 11" src="https://github.com/lukaDoric/SOA/assets/45179708/0dbf8d53-e2e3-4ccb-92a3-ee97b6a11d65">
 
 Dakle, šta se najpre dogodilo? Docker nije uspeo da pronađe sliku sa datim nazivom na lokalnom računaru pa se obratio javnom registru (DockerHub-u) i krenuo da povlači poslednju stable verziju (označena tagom latest) slike. Rekli smo da se slike sastoje iz više layer-a pa je preuzeo svaki sloj (linije koje se završavaju sa Pull complete). Nakon preuzimanja pokrenuo je nov kontejner. Ovde smo dodali i dva flega prilikom pokretanja komande. Fleg -i i -t. Prvi naglašava da je neophodno održati standard input (STDIN) dok drugi fleg dodeljuje pseudo terminal (terminal koji ima funkcije kao i pravi fizički terminal). Nakon naziva slike zadali smo i komandu koja je pokrenula Linux shell pri čemu nam se pokretanje kontejnera prikazuje kao na slici.
 
 Kada pokrenemo top komandu unutar kontejnera vidimo da je to jedini proces koji je zapravo pokrenut u našem kontejneru.
 
-![image-011](https://github.com/lukaDoric/SOA/assets/45179708/16a716ca-3dc6-4c08-a341-5b3244c5f764)
+<img width="861" alt="Screenshot 2024-03-15 at 12 39 55" src="https://github.com/lukaDoric/SOA/assets/45179708/340f6757-314e-4002-97d5-ee7184499a94">
 
 Sa komandom `exit` napuštamo kontejner i vraćamo se na glavni terminal. Ono što je bitno razumeti je da smo sa ovom komandom ugasili glavni proces kontejnera i samim tim smo ugasili i kontejner.
 
 Sa komandom `docker ps` smo zatražili izlistavanje svih pokrenutih kontejnera.
 
-![image-012](https://github.com/lukaDoric/SOA/assets/45179708/169bb970-d413-4c2f-a028-6b18a831a2ab)
+<img width="1500" alt="Screenshot 2024-03-15 at 12 41 32" src="https://github.com/lukaDoric/SOA/assets/45179708/eb6990a4-3b8d-4a41-adce-177f4fb188ff">
 
 S obzirom da smo sa exit ugasili glavni proces našeg kontejnera (samim tim i njega), prilikom izvršenja gorepomenute komande neće biti izlistane informacije o kontejneru. Dodavanjem flega -a izlistavamo i pokrenute i zaustavljene kontejnere dok sa flegom -l izlistavamo informacije o poslednjem kontejneru koji je bio pokrenut bez obzira da li je i dalje pokrenut ili je zaustavljen. Sa flegom -n x slična priča kao i sa -l, s tim što ovde eksplicitno naglašavamo za koliko kontejnera želimo da vidimo informacije. Konkretne stvari koje nam se prikazuju jesu:
 
@@ -135,7 +135,7 @@ S obzirom da smo sa exit ugasili glavni proces našeg kontejnera (samim tim i nj
 
 Sa komandom docker images izlistavamo informacije o svim preuzetim i kreiranim slikama.
 
-![image-013](https://github.com/lukaDoric/SOA/assets/45179708/7e7ce1ae-9739-4d72-94e0-6df2cb4da731)
+<img width="1500" alt="Screenshot 2024-03-15 at 12 42 15" src="https://github.com/lukaDoric/SOA/assets/45179708/8eb29568-9242-478e-961b-73adb0dbd48c">
 
 Informacije koje nam se prikazuju su:
 
@@ -147,7 +147,7 @@ Informacije koje nam se prikazuju su:
 
 Sa komandom `docker run` smo istovremeno preuzeli sliku i odmah pokrenuli kontejner od nje. Možemo izvršiti i samo preuzimanje slike bez naknadnog pokretanja putem komande `docker pull naziv_slike:tag`.
 
-![image-014](https://github.com/lukaDoric/SOA/assets/45179708/c8e5a827-ee36-4255-bdb5-737282646393)
+<img width="818" alt="Screenshot 2024-03-15 at 12 44 26" src="https://github.com/lukaDoric/SOA/assets/45179708/4f59593e-2b4d-438e-bfd9-2a2e529a45a9">
 
 U konkretnom slučaju preuzeli smo Fedora sliku gde smo sa tagom naznačili verziju 20.
 
@@ -187,24 +187,25 @@ Takođe, preporuke koje diktira najbolja praksa možete naći u zvaničnoj dokum
 
 Dakle, tok koji treba ispoštovati je pisanje koda, pa kad s tim završimo, kreiramo Dockerfile, pokrećemo docker image build kako bi kreirali sliku, i zatim startujemo kontejner na osnovu slike koju smo kreirali.
 
-![image-017](https://github.com/lukaDoric/SOA/assets/45179708/26f9d30c-a000-49af-bdb6-1202e2c64e2f)
+-----------------------------------------------
+Objašnjenje par termina vezanih za kreiranje Docker slika:
 
-Kreiranje Dockerfile-a i build-ovanje slike biće ilustrovano na Spring-boot aplikaciji iz materijala (folder first-app).
+`Host mašina`: Računar na kom su pokrenuti docker kontejneri. U vašem slučaju će to biti vaš laptop ili desktop.
 
-![image-018](https://github.com/lukaDoric/SOA/assets/45179708/53f0be14-0d18-4a47-b2b3-cd4538720824)
+`docker build` : Komanda koja uzima `Dockerfile` i na osnovu njega kreira sliku. Kao argument uzima putanju do direktorijuma gde se nalazi Dockerfile. Pošto ćete najčešće biti pozicionirani u direktorijumu gde se nalazi Dockerfile, ovaj argument će biti "`.`" Potrebno je i da damo naziv slike koju kreiramo. Za to koristimo falg `-t`. Naziv slike ima i _tag_, ili verziju, koji se nalazi nakon "`:`". Primer naziva slike može biti `mysql:5.1` ili `mysql:beta`, gde je "mysql" naziv slike, a "beta" ili "5.1" tagovi. Ako ne navedemo tag, već samo naziv, Docker automatski dodeljuje tag "latest".
 
-U samom Dockerfile-u definisali smo 5 instrukcija:
+Kompletan primer ove komande je: `docker build -t static_web_server .`
 
-- Sa prvom instrukcijom smo rekli šta je bazna slika. U ovom slučaju smo izabrali oficijelnu sliku koja se oslanja na Alpine Linux, koji dolazi sa instaliranim JDK-om i verzije 8.
-- Sa drugom instrukcijom smo zadali metapodatke koje se odnose na kreatora i održavaoca slike.
-- EXPOSE-ujemo još port na kom aplikacija sluša unutar kontejnera.
-- WORKDIR podešava trenutni radni direktorijum unutar kontejnera na /app.
-- COPY instrukcija vrši kopiranje servers.jar fajla sa host fajl sistema u trenutni radni direktorijum unutar kontejnera (odnosno kopira u /app direktorijum).
-- CMD instrukcija navodi šta će biti executable i šta će biti pokrenuto sa samim pokretanjem kontejnera.
+<img width="1510" alt="Screenshot 2024-03-15 at 12 52 25" src="https://github.com/lukaDoric/SOA/assets/45179708/e25deb70-f161-429a-bc99-1c0a7ff2ce81">
 
-Kada smo kreirali `Dockerfile`, pozicioniramo se u korenski direktorijum konkretne aplikacije i izvršimo komandu `docker image build -t first-app .` Sa flegom `-t` definišemo naziv naše slike (potencijalno možemo dodati i tag, ali ako ga ne dodamo biće latest) i sa tačkom . definišemo šta je build context odnosno lokaciju našeg izvornog koda. Ako smo pozicionirani u korenskom direktorijumu aplikacije, onda je lokacija tekući direktorijum. Rezultat izvršavanja komande je prikazan u pratećoj slici.
+`docer run`: Komanda koja na osnovu slike kreira i pokreće kontejner (izvršno okruženje). Kao argument uzima naziv slike. Prvo proverava da li se slika sa tim imenom nalazi na računaru, a zatim, ako je ne pronađe, pokušava da vidi da li može tu sliku da skine sa [`Docker hub-a`](https://hub.docker.com/). Ova komanda prima mnogo opcionih parametara koji detaljnije definišu ponašanje našeg kontejnera. Ovde ću nabrojati samo nekoliko najosnovnijih:
+- -p lista port binding-a. Možemo da navedemo koje portove naše host mašine spajamo sa portovima docker containera (npr -p 8080:8080)
+- -e lista environment variabli koje će se upisati unutar kontejnera prilikom pokretanja (npr. -e DATABASE_USERNAME='student')
+- -d kad budete pokretali prvi kontejner, videćete da on preuzme kontrolu nad vašim terminalom. Ako ne želite to da se desi, na kraju ove komande dodate lag -d, što je skraćenica za detached.
 
-![image-019](https://github.com/lukaDoric/SOA/assets/45179708/302bf3ed-0020-4a64-8d28-b0a1887e99a8)
+Primer komande: `docker run -p 8080:8080 static_web_server -d`
+
+<img width="1144" alt="Screenshot 2024-03-15 at 13 05 20" src="https://github.com/lukaDoric/SOA/assets/45179708/b65e4b7d-a467-4c29-af5a-ed052b6e03df">
 
 Ukoliko ukucamo komandu `docker images`, kreirana slika će nam biti prikazana kao i sve ostale preuzete slike.
 
@@ -213,7 +214,7 @@ S obzirom na to da aplikacija skladišti podatke u MySQL bazu, neophodno je pokr
 - Kreirati novu mrežu pod nazivom first-network: `docker network create first-network`
 - Pokrenuti MySQL kontejner i dodati kontejner u first-network mrežu (sve ovo je jedna komanda): `docker run -d --network first-network --name mysql -e MYSQL_ROOT_PASSWORD=password -e MYSQL_USER=sa -e MYSQL_PASSWORD=zgadija -e MYSQL_DATABASE=servers mysql:8.0.19`
 - Nakon izvršene komande sačekati par minuta da se baza podigne.
-- Pokrenuti kontejner Spring-Boot aplikacije i dodati kontejner u first-network mrežu (sa `-p` flegom kažemo da mapiramo port iz kontejnera na port na hostu):
+- Pokrenuti kontejner go web aplikacije (`WebServerWithDB`) i dodati kontejner u first-network mrežu (sa `-p` flegom kažemo da mapiramo port iz kontejnera na port na hostu):
 `docker run -it --network first-network --name app -p 8089:8080 -e DATABASE_USERNAME=sa -e DATABASE_PASSWORD=zgadija -e DATABASE_DOMAIN=mysql -e DATABASE_PORT=3306 first-app`
 (Nakon izvršene komande treba da se dobije rezultat kao na sledećoj slici)
 
