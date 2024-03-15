@@ -1,0 +1,48 @@
+version: "3.8"
+services:
+  servers:
+    build: 
+      context: ./
+      dockerfile: Dockerfile
+      args:
+        STAGE: ${STAGE:-dev}
+      target: ${TARGET:-appWebServerRuntime}
+    image: danijelradakovic/servers:${VERSION:-0.2.0}-${STAGE:-dev}
+    container_name: servers
+    restart: on-failure
+    networks:
+      - servers
+    ports:
+      - 8080:8080
+    environment:
+      DATABASE_USERNAME: ${DATABASE_USERNAME}
+      DATABASE_PASSWORD: ${DATABASE_PASSWORD}
+      DATABASE_DOMAIN: ${DATABASE_DOMAIN}
+      DATABASE_SCHEMA: ${DATABASE_SCHEMA}
+    depends_on: 
+      - database
+    
+  database:
+    image: mysql:${MYSQL_VERSION:-8.0.19}
+    container_name: mysql
+    restart: always
+    networks:
+      - servers
+    ports:
+      - 3400:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+    volumes:
+      - database-data:/var/lib/mysql
+
+volumes:
+  database-data:
+    name: server-database
+
+networks:
+  servers:
+    name: servers
+    driver: bridge

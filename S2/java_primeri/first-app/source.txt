@@ -1,0 +1,5 @@
+Back-end Application:
+https://github.com/DanijelRadakovic/Servers/archive/v1.0.0.zip
+
+Front-end Application:
+https://github.com/DanijelRadakovic/Servers-Front/archive/v1.0.0.zip
