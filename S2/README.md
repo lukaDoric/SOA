@@ -2,20 +2,6 @@
 
 <h2>Video materijal koji prati ovu lekciju:</h2>
 
-[Virtualne mašine](https://youtu.be/xxC2yAfamSM)
-
-[Mane virtuelnih mašina](https://youtu.be/MbVYKEUDab0)
-
-[Linux cgroups & namespaces](https://youtu.be/Mby8-4twxNY)
-
-[Uvod u Docker](https://youtu.be/MAivaLjKDaY)
-
-[Interna arhitektura Docker-a](https://youtu.be/nat6d-kNTGU)
-
-[Uvod u Docker slike](https://youtu.be/LsjntJHEe_8)
-
-[Prva Docker slika](https://youtu.be/xfuSdAcusfw)
-
 [Docker slika za servis i bazu podataka](https://youtu.be/8cyjjYR6LzY)
 
 [Pravilan redosled komandi prilikom definisanja Docker slike](https://youtu.be/bogpeVjMIKE)
@@ -38,6 +24,11 @@ Virtuelne mašine vs kontejneri:
 
 Ovi nedostaci su u priču uključili kontejnere. Za razliku od virtuelnih mašina gde svaka ima sopstveni OS i oslanja se na hypervisor, kontejneri se oslanjaju na jedan host OS i dele njegove funkcije kernela (takođe i binaries, libraries itd.) i samim tim su lakši (lightweight) i u priličnoj meri se smanjuje overhead koji donose VM-e. Kontejnerske tehnologije su bile prisutne duže vremena ali nisu bile previše popularne jer je kreiranje i upravljanje kontejnerima bilo dosta kompleksno ali je Docker uspeo to da promeni.
 
+Na sledećim linkovima možeš pogledati video snimke o virtualnim mašinama, njihovim manama i o Linux c-grupama:  
+[Virtualne mašine](https://youtu.be/xxC2yAfamSM)  
+[Mane virtuelnih mašina](https://youtu.be/MbVYKEUDab0)  
+[Linux cgroups & namespaces](https://youtu.be/Mby8-4twxNY)
+
 ### Instalacija Docker-a
 
 Detaljna uputstva za instaliranje Docker-a:
@@ -47,7 +38,7 @@ Detaljna uputstva za instaliranje Docker-a:
 
 <h2>2. Šta je Docker i koje su njegove komponente?</h2>
 
-Docker je open-source platforma koja automatizuje proces deployment-a aplikacija u softverske kontejnere. On dodaje application deployment engine na vrh virtuelized container execution environment-a pri čemu je dizajniran tako da omogući lagano i brzo okruženje za izvršavanje naših aplikacija kao i izuzetno lako premeštanje aplikacija iz jednog okruženja u drugo (`test` -> `production`).
+Docker je open-source platforma koja automatizuje proces deployment-a aplikacija u softverske kontejnere. Dizajniran je tako da omogući lagano i brzo okruženje za izvršavanje naših aplikacija kao i izuzetno lako premeštanje aplikacija iz jednog okruženja u drugo (`test` -> `production`).
 
 Njegove osnovne komponente su:
 
@@ -63,6 +54,10 @@ Kada pričamo o Docker Engine-u, govorimo o klasičnoj klijent-server aplikaciji
 
 Sam Docker daemon je nakon refaktorisanja (zbog toga što je narastao u jedan veliki monolit) ostao bez ikakvog koda koji zaista kreira i pokreće kontejnere. On se obraća putem gRPC API-a preko lokalnog Linux socket-a `containerd`-u (long running daemon-u) koji predstavlja "API fasadu" koja omogućuje startovanje containerd-shim-a odnosno roditeljskog procesa za svaki kontejner gde runc (container runtime) vrši kreiranje kontejnera. Sloj ispod containerd-a vrši kompletan rad sa kernelom odnosno koristi njegove funkcije. Iako arhitektura izgleda prilično kompleksno, ovakva podela omogućuje da se pojedine komponente bez ikakvih problema zamenjuju a da to ne utiče na pokrenute kontejnere što sa administratorske tačke gledišta puno olakšava stvari. Na primer, moguće je promeniti verziju Docker-a a da se pri tome ne moraju zaustavljati već pokrenuti kontejneri.
 
+Na sledećim linkovima možeš pogledati video snimke o Docker-u:
+[Uvod u Docker](https://youtu.be/MAivaLjKDaY)
+[Interna arhitektura Docker-a](https://youtu.be/nat6d-kNTGU)
+
 <h2>3. Šta su Docker slike?</h2>
 
 Generalno je poznat koncept slike kada je priča o virtuelnim mašinama. Za sličnu stvar se koriste i Docker slike, odnosno predstavljaju build-time konstrukt od kojih nastaju kontejneri, ali se tu sličnost završava. Docker slike predstavljaju skup read-only layer-a gde svaki sloj predstavlja različitosti u fajlsistemu u odnosu na prethodni sloj, pri čemu uvek postoji jedan bazni (base) sloj. Upotrebom storage driver-a skup svih slojeva čini root filesystem kontejnera, odnosno svi slojevi izgledaju kao jedan unificirani fajlsistem.
@@ -76,6 +71,10 @@ Svi ovi read-only slojevi predstavljaju osnovu za svaki kontejner koji se pokre�
 ![image-005](https://github.com/lukaDoric/SOA/assets/45179708/f8271035-8fad-40cd-931b-941f81c69d8a)
 
 Ovakav mehanizam se zove Copy-on-write i delom čini Docker zaista moćnim. Koliko god kontejnera da kreiramo, read-only slojevi će uvek biti isti, tj. ostaće nepromenjeni, samo će svaki kontejner dobiti sopstveni read-write sloj. Na ovaj način se štedi jako puno prostora na disku jer kada smo jednom preuzeli/kreirali sliku, koliko god kontejnera da pokrenemo, slika ostaje apsolutno nepromenjena.
+
+Na sledećim linkovima možeš pogledati video snimke o docker slikama:
+[Uvod u Docker slike](https://youtu.be/LsjntJHEe_8)
+[Prva Docker slika](https://youtu.be/xfuSdAcusfw)
 
 <h2>4. Odakle se preuzimaju postojeće slike?</h2>
 
