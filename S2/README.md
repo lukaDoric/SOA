@@ -73,7 +73,7 @@ Svi ovi read-only slojevi predstavljaju osnovu za svaki kontejner koji se pokre�
 Ovakav mehanizam se zove Copy-on-write i delom čini Docker zaista moćnim. Koliko god kontejnera da kreiramo, read-only slojevi će uvek biti isti, tj. ostaće nepromenjeni, samo će svaki kontejner dobiti sopstveni read-write sloj. Na ovaj način se štedi jako puno prostora na disku jer kada smo jednom preuzeli/kreirali sliku, koliko god kontejnera da pokrenemo, slika ostaje apsolutno nepromenjena.
 
 Na sledećim linkovima možeš pogledati video snimke o docker slikama:
-[Uvod u Docker slike](https://youtu.be/LsjntJHEe_8)
+[Uvod u Docker slike](https://youtu.be/LsjntJHEe_8)  
 [Prva Docker slika](https://youtu.be/xfuSdAcusfw)
 
 <h2>4. Odakle se preuzimaju postojeće slike?</h2>
@@ -84,7 +84,7 @@ Postojeći Docker registri nude mesto gde korisnici mogu da preuzmu već postoje
 
 <h2>5. Šta predstavljaju kontejneri?</h2>
 
-Kako slike predstavljaju build-time konstrukt, tako su kontejneri run-time konstrukt. Gruba analogija odnosa između slike i kontejnera se može posmatrati kao klasa i instanca te klase. Kontejneri predstavljaju lightweight execution environment koji omogućuju izolovanje aplikacije i njenih zavisnosti koristeći `kernel namespaces` i `cgroups` mehanizme.
+Kako slike predstavljaju build-time konstrukt (templejt), tako su kontejneri run-time konstrukt (pokreću se na osnovu templejta). Gruba analogija odnosa između slike i kontejnera se može posmatrati kao klasa i instanca te klase. Kontejneri predstavljaju lightweight execution environment koji omogućuju izolovanje aplikacije i njenih zavisnosti koristeći `kernel namespaces` i `cgroups` mehanizme.
 
 ![image-006](https://github.com/lukaDoric/SOA/assets/45179708/7657bc58-9b52-4e5e-a492-09839f6552e6)
 
