@@ -1,6 +1,6 @@
 FROM alpine
 WORKDIR app
-COPY ./static-server /usr/bin
+COPY ./static-server .
 COPY ./static ./static
-#CMD
-ENTRYPOINT ["static-server"]
+RUN chmod +x ./static-server
+ENTRYPOINT ["./static-server"]

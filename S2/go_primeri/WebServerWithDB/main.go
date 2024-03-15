@@ -14,7 +14,7 @@ import (
 )
 
 func initDB() *gorm.DB {
-	connectionStr := "root:root@tcp(localhost:3306)/students?charset=utf8mb4&parseTime=True&loc=Local"
+	connectionStr := "root:root@tcp(database:3306)/students?charset=utf8mb4&parseTime=True&loc=Local"
 	database, err := gorm.Open(mysql.Open(connectionStr), &gorm.Config{})
 	if err != nil {
 		print(err)
