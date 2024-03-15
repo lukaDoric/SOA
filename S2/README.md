@@ -209,22 +209,8 @@ Primer komande: `docker run -p 8080:8080 static_web_server -d`
 
 Ukoliko ukucamo komandu `docker images`, kreirana slika će nam biti prikazana kao i sve ostale preuzete slike.
 
-S obzirom na to da aplikacija skladišti podatke u MySQL bazu, neophodno je pokrenuti MySQL bazu. Da bismo uspešno realizovali komunikaciju između baze i aplikacije, poželjno je da se nalaze unutar iste mreže.
+Ako hoćemo preko dockera da pokrenemo aplikaciju koja komunicira sa bazom podataka, naišli bi na problem. Aplikacija bi pokušala da se poveže na bazu podataka na adresi localhose:3306. S obzirom da aplikacija više nije pokrenuta direktno na našoj mašini, već unutar kontejnera, sada se localhost odnosi na sam kontejner, a ne na naš računar. S obzirom da unutar kontejnera nema pokrenute baze na adresi 3306, aplikacija ne bi radila. Možemo konfigurisati kontejner da sve "locakhost" pozive preusmeri na host mašinu, ali to nećemo raditi, već ćemo pokazati drugi način kako da zaobiđemo ovaj problem u poglavlju 9.
 
-- Kreirati novu mrežu pod nazivom first-network: `docker network create first-network`
-- Pokrenuti MySQL kontejner i dodati kontejner u first-network mrežu (sve ovo je jedna komanda): `docker run -d --network first-network --name mysql -e MYSQL_ROOT_PASSWORD=password -e MYSQL_USER=sa -e MYSQL_PASSWORD=zgadija -e MYSQL_DATABASE=servers mysql:8.0.19`
-- Nakon izvršene komande sačekati par minuta da se baza podigne.
-- Pokrenuti kontejner go web aplikacije (`WebServerWithDB`) i dodati kontejner u first-network mrežu (sa `-p` flegom kažemo da mapiramo port iz kontejnera na port na hostu):
-`docker run -it --network first-network --name app -p 8089:8080 -e DATABASE_USERNAME=sa -e DATABASE_PASSWORD=zgadija -e DATABASE_DOMAIN=mysql -e DATABASE_PORT=3306 first-app`
-(Nakon izvršene komande treba da se dobije rezultat kao na sledećoj slici)
-
-![image-020](https://github.com/lukaDoric/SOA/assets/45179708/f3ff0093-3312-4881-a441-1058e9261427)
-
-Zatim je potrebno pomoću browsera pristupiti na adresu `localhost:8089` kako pristupili aplikaciji. Slika ispod prikazuje aplikaciju nakon uspešnog dodavanja novog servera.
-
-![image-021](https://github.com/lukaDoric/SOA/assets/45179708/5255066d-9c5b-4b76-a3c4-46cbb861771c)
-
-U zavisnosti od potrebe, nekad je neophodno kreirati više ​Dockerfile-​a, odnosno više slika za različite faze razvoja aplikacije. Jedna varijanta jeste da se svaki ​Dockerfile nalazi u zasebnom direktorijumu. Drugi način jeste zadavanje drugačijeg imena/ekstenzije. Primer ​Dockerfile.dev, Dockerfile.test i​td. Voditi računa prilikom build-​a, da ne bi došlo do konkretnih problema, odnosno iskoristiti fleg -​f/​-​file i​zadati naziv konkretnog ​Dockerfile-​a.
 Napredne stvari:
 
 ● [Multi-stage build](https://docs.docker.com/develop/develop-images/multistage-build/)
@@ -237,17 +223,15 @@ Zato je ​Docker​ uveo koncept pod nazivom `​volumes`. D​a bi mogli da č
 
 Kreiranje ​volume-​a je moguće odraditi sa komandom `​docker volume create naziv`.​​Mount​-ovanje se radi prilikom pokretanja sa flegom -​-volume i​li -​v. ​Primer: ​`docker run -i -t -v primer1:/nekiPodaci ubuntu /bin/bash`. ​Dakle najobičnija komanda (koju smo već videli), proširena flegom -​v ​gde smo zadali naziv ​volume-​a i gde će biti izvršeno mount-​ovanje u okviru samog kontejnera.
 
-![20](https://github.com/lukaDoric/SOA/assets/45179708/254765ac-a423-4fa6-b96f-5654c4d57888)
+<img width="1141" alt="Screenshot 2024-03-15 at 15 33 14" src="https://github.com/lukaDoric/SOA/assets/45179708/cb2f4ac0-33ac-40c2-a8a2-0bb87847d806">
 
 Na slici je prikazano najpre kreiranje ​volume-​a, a zatim je pokrenut kontejner kome smo ​mount​-ovali prethodno kreirani ​volume na putanji ​nekiPodaci.​U okviru prvog kontejnera smo i kreirali običan tekstualni fajl. Zatim smo izvršili ​exit (​ugasili glavni proces /​bin/bash ​i samim tim i ugasili kontejner) i pokrenuli nov kontejner kome smo takođe ​mount​-ovali isti ​volume na istoj putanji (apsolutno ne mora biti ista) i kada smo ušli u sam folder, datoteka koju smo prethodno kreirali iz totalno drugog kontejnera i dalje postoji.
 
 <h2>9. Šta raditi sa ostalim mikroservisima?</h2>
 
-U prethodnom poglavljima je objašnjena manipulacija ​volume-​a, kako kreirati sopstvenu sliku i kako od nje kreirati kontejner. Međutim, postavlja se pitanje šta raditi ukoliko imamo više aplikacija, od kojih je neke neophodno pokrenuti u više instanci (kontejnera), koji moraju da komuniciraju međusobno. Tada pojedinačno kreiranja slika i pokretanja kontejnera nije praktično rešenje. Zato se koristi alat `docker-compose` ​koji nam omogućuje pokretanje i zaustavljanje ​više aplikacija koristeći jednu komandu, kao i zejdnički ispis logova svih aplikacija na jedan terminal.
+U prethodnom poglavljima je objašnjena manipulacija ​volume-​a, kako kreirati sopstvenu sliku i kako od nje kreirati kontejner. Međutim, postavlja se pitanje šta raditi ukoliko imamo više aplikacija, od kojih je neke neophodno pokrenuti u više instanci (kontejnera), koji moraju da komuniciraju međusobno. Tada pojedinačno kreiranja slika i pokretanja kontejnera nije praktično rešenje. Zato se koristi alat `docker compose` ​koji nam omogućuje pokretanje i zaustavljanje ​više aplikacija koristeći jednu komandu, kao i zejdnički ispis logova svih aplikacija na jedan terminal.
 
-Sve što je neophodno jeste da kreiramo fajl pod nazivom `docker-compose.yml`​ Na slici je prikazan deo iz docker-compose.yml fajla koji se nalazi ununar ​demo​direktorijuma.
-
-![21](https://github.com/lukaDoric/SOA/assets/45179708/05a43caa-414c-446f-a5fd-716e0bc51b0b)
+Sve što je neophodno jeste da kreiramo fajl pod nazivom `docker-compose.yml`​ U folderu `go-primeri/nginx-example` možete videti kako treba ovaj fajl da izgleda
 
 U fajlu za konkretan primer je definisano više direktiva:
 - **version** Ovde naglašavamo koju verziju formata želimo da koristimo. Ovo polje
@@ -271,7 +255,8 @@ Za dodatne direktive i njihove vrednosti možete pogledati u zvaničnoj [dokumen
 ​
 Pozicioniramo se na putanju do direktorijuma u kojem se nalazi `docker-compose.yml` i pozovemo naredbu: `​docker compose up --build`​ Sa ovim pokrećemo sve naše servise (kontejnere).
 
-![23](https://github.com/lukaDoric/SOA/assets/45179708/d176be97-2110-4d8a-856e-d54682698911)
+<img width="1501" alt="Screenshot 2024-03-15 at 15 40 45" src="https://github.com/lukaDoric/SOA/assets/45179708/9b0b959b-caa1-4f01-a860-525e7db26efd">
+<img width="1501" alt="Screenshot 2024-03-15 at 15 41 23" src="https://github.com/lukaDoric/SOA/assets/45179708/4507685c-daf9-4580-ae01-fa8d4ef9be09">
 
 <h2>10. Docker Swarm</h2>
 
