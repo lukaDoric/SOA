@@ -4,7 +4,7 @@
 
 [Virtualne mašine](https://youtu.be/xxC2yAfamSM)
 
-[Mane virtualnig mašina](https://youtu.be/MbVYKEUDab0)
+[Mane virtuelnih mašina](https://youtu.be/MbVYKEUDab0)
 
 [Linux cgroups & namespaces](https://youtu.be/Mby8-4twxNY)
 
