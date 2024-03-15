@@ -231,7 +231,49 @@ Na slici je prikazano najpre kreiranje ​volume-​a, a zatim je pokrenut konte
 
 U prethodnom poglavljima je objašnjena manipulacija ​volume-​a, kako kreirati sopstvenu sliku i kako od nje kreirati kontejner. Međutim, postavlja se pitanje šta raditi ukoliko imamo više aplikacija, od kojih je neke neophodno pokrenuti u više instanci (kontejnera), koji moraju da komuniciraju međusobno. Tada pojedinačno kreiranja slika i pokretanja kontejnera nije praktično rešenje. Zato se koristi alat `docker compose` ​koji nam omogućuje pokretanje i zaustavljanje ​više aplikacija koristeći jednu komandu, kao i zejdnički ispis logova svih aplikacija na jedan terminal.
 
-Sve što je neophodno jeste da kreiramo fajl pod nazivom `docker-compose.yml`​ U folderu `go-primeri/nginx-example` možete videti kako treba ovaj fajl da izgleda
+Sve što je neophodno jeste da kreiramo fajl pod nazivom `docker-compose.yml`​ U folderu `go-primeri/WebServerWithDB` i `nginx-example` možete videti kako treba ovaj fajl da izgleda
+
+```yml
+
+version: "3.7"
+services:
+  servers:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    image: students_web_server
+    container_name: student_server
+    restart: always
+    networks:
+      - servers
+    ports:
+      - 8080:8080
+    depends_on:
+      - database
+  
+  database:
+    image: mysql
+    container_name: mysql
+    restart: always
+    networks:
+      - servers
+    ports:
+      - 4000:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: students
+    volumes:
+      - database-data:/var/lib/mysql
+
+volumes:
+  database-data:
+    name: server-database
+
+networks:
+  servers:
+    name: servers
+    driver: bridge
+```
 
 U fajlu za konkretan primer je definisano više direktiva:
 - **version** Ovde naglašavamo koju verziju formata želimo da koristimo. Ovo polje
@@ -253,10 +295,11 @@ između njih, odnosno koji servisi moraju biti pokrenuti pre nego što se pokren
 
 Za dodatne direktive i njihove vrednosti možete pogledati u zvaničnoj [dokumentaciji ​https://docs.docker.com/compose/](dokumentaciji ​https://docs.docker.com/compose/)
 ​
+Još jedan bitan detalj na koji bi skrenuli pažnju: Ako odete u `main.go` fajl u primeru `WebServerWithDB`, videćete da baza više nije na localhost adresi, već database. Servisi koji su u istoj mreži unutar docker-a mogu komunicirati preko svog imena umesto ip adrese.
+
 Pozicioniramo se na putanju do direktorijuma u kojem se nalazi `docker-compose.yml` i pozovemo naredbu: `​docker compose up --build`​ Sa ovim pokrećemo sve naše servise (kontejnere).
 
-<img width="1501" alt="Screenshot 2024-03-15 at 15 40 45" src="https://github.com/lukaDoric/SOA/assets/45179708/9b0b959b-caa1-4f01-a860-525e7db26efd">
-<img width="1501" alt="Screenshot 2024-03-15 at 15 41 23" src="https://github.com/lukaDoric/SOA/assets/45179708/4507685c-daf9-4580-ae01-fa8d4ef9be09">
+<img width="1501" alt="Screenshot 2024-03-15 at 18 28 59" src="https://github.com/lukaDoric/SOA/assets/45179708/2f9530fd-db6f-4cea-94f9-704e5985ca5e">
 
 <h2>10. Docker Swarm</h2>
 
