@@ -47,7 +47,7 @@ Kada pričamo o Docker Engine-u, govorimo o klasičnoj klijent-server aplikaciji
 
 Sam Docker daemon je nakon refaktorisanja (zbog toga što je narastao u jedan veliki monolit) ostao bez ikakvog koda koji zaista kreira i pokreće kontejnere. On se obraća putem gRPC API-a preko lokalnog Linux socket-a `containerd`-u (long running daemon-u) koji predstavlja "API fasadu" koja omogućuje startovanje containerd-shim-a odnosno roditeljskog procesa za svaki kontejner gde runc (container runtime) vrši kreiranje kontejnera. Sloj ispod containerd-a vrši kompletan rad sa kernelom odnosno koristi njegove funkcije. Iako arhitektura izgleda prilično kompleksno, ovakva podela omogućuje da se pojedine komponente bez ikakvih problema zamenjuju a da to ne utiče na pokrenute kontejnere što sa administratorske tačke gledišta puno olakšava stvari. Na primer, moguće je promeniti verziju Docker-a a da se pri tome ne moraju zaustavljati već pokrenuti kontejneri.
 
-Na sledećim linkovima možeš pogledati video snimke o Docker-u:
+Na sledećim linkovima možeš pogledati video snimke o Docker-u:  
 [Uvod u Docker](https://youtu.be/MAivaLjKDaY)  
 [Interna arhitektura Docker-a](https://youtu.be/nat6d-kNTGU)
 
