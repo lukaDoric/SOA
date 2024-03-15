@@ -207,7 +207,9 @@ Primer komande: `docker run -p 8080:8080 static_web_server -d`
 
 Ukoliko ukucamo komandu `docker images`, kreirana slika će nam biti prikazana kao i sve ostale preuzete slike.
 
-Ako hoćemo preko dockera da pokrenemo aplikaciju koja komunicira sa bazom podataka, naišli bi na problem. Aplikacija bi pokušala da se poveže na bazu podataka na adresi localhose:3306. S obzirom da aplikacija više nije pokrenuta direktno na našoj mašini, već unutar kontejnera, sada se localhost odnosi na sam kontejner, a ne na naš računar. S obzirom da unutar kontejnera nema pokrenute baze na adresi 3306, aplikacija ne bi radila. Možemo konfigurisati kontejner da sve "locakhost" pozive preusmeri na host mašinu, ali to nećemo raditi, već ćemo pokazati drugi način kako da zaobiđemo ovaj problem u poglavlju 9.
+Ako hoćemo preko dockera da pokrenemo kompleksniju go aplikaciju koja komunicira sa bazom podataka, moramo promeniti nekoliko stvari. Za početak menjamo Dockerfile.
+
+Bazna slika više nije `FROM alpine` već `FROM golag:alpine`. Ova druga slika u sebi sadrži go kompajler, te ćemo moći od go source koda da napravimo executable datoteku. Samim tim će slika koju dobijemo koristeći novu verziju Dockerfile-a zauzimati više memorija, zbog dodatnih alata koji će biti prisutni. Pored ove promene, takođe bi morali da podesimo komunikaciju između naše golang aplikacije i mysql baze podataka. Više ne možemo da se povezujemo na "localhost:3306" iz aplikacije, jer u okviru virtualne mašine (kontejnera) gde je pokrenut veb server ne postoji baza podataka. Bazu želimo da podignemo u zasebnom kontejneru, kako bi izolovali rad aove dve nezavisne aplikacije. Da bi omogućili komunikaciju između 2 kontejnera možemo koristiti Docker mreže, što ćemo videti u 9. poglavlju zajedno za `docker compose` alatom.
 
 Napredne stvari:
 
