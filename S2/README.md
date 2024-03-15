@@ -29,13 +29,6 @@ Na sledećim linkovima možeš pogledati video snimke o virtualnim mašinama, nj
 [Mane virtuelnih mašina](https://youtu.be/MbVYKEUDab0)  
 [Linux cgroups & namespaces](https://youtu.be/Mby8-4twxNY)
 
-### Instalacija Docker-a
-
-Detaljna uputstva za instaliranje Docker-a:
-- [Linux](https://docs.docker.com/engine/install/ubuntu/)
-- [Windows](https://docs.docker.com/desktop/install/windows-install/) (Nepohodno je da imate instaliran WSL 2, što bi trebalo da se nalazi na svim verizijama Windows 10 i 11)
-- [Mac](https://docs.docker.com/desktop/install/mac-install/) Obratite pažnju ako imate nove računare sa Apple čipovima. Dosta docker slika ne radi kako treba na ARM arhitekturi.
-
 <h2>2. Šta je Docker i koje su njegove komponente?</h2>
 
 Docker je open-source platforma koja automatizuje proces deployment-a aplikacija u softverske kontejnere. Dizajniran je tako da omogući lagano i brzo okruženje za izvršavanje naših aplikacija kao i izuzetno lako premeštanje aplikacija iz jednog okruženja u drugo (`test` -> `production`).
@@ -57,6 +50,13 @@ Sam Docker daemon je nakon refaktorisanja (zbog toga što je narastao u jedan ve
 Na sledećim linkovima možeš pogledati video snimke o Docker-u:
 [Uvod u Docker](https://youtu.be/MAivaLjKDaY)
 [Interna arhitektura Docker-a](https://youtu.be/nat6d-kNTGU)
+
+### Instalacija Docker-a
+
+Detaljna uputstva za instaliranje Docker-a:
+- [Linux](https://docs.docker.com/engine/install/ubuntu/)
+- [Windows](https://docs.docker.com/desktop/install/windows-install/) (Nepohodno je da imate instaliran WSL 2, što bi trebalo da se nalazi na svim verizijama Windows 10 i 11)
+- [Mac](https://docs.docker.com/desktop/install/mac-install/) Obratite pažnju ako imate nove računare sa Apple čipovima. Dosta docker slika ne radi kako treba na ARM arhitekturi.
 
 <h2>3. Šta su Docker slike?</h2>
 
