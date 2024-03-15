@@ -72,7 +72,7 @@ Svi ovi read-only slojevi predstavljaju osnovu za svaki kontejner koji se pokre�
 
 Ovakav mehanizam se zove Copy-on-write i delom čini Docker zaista moćnim. Koliko god kontejnera da kreiramo, read-only slojevi će uvek biti isti, tj. ostaće nepromenjeni, samo će svaki kontejner dobiti sopstveni read-write sloj. Na ovaj način se štedi jako puno prostora na disku jer kada smo jednom preuzeli/kreirali sliku, koliko god kontejnera da pokrenemo, slika ostaje apsolutno nepromenjena.
 
-Na sledećim linkovima možeš pogledati video snimke o docker slikama:
+Na sledećim linkovima možeš pogledati video snimke o docker slikama:  
 [Uvod u Docker slike](https://youtu.be/LsjntJHEe_8)  
 [Prva Docker slika](https://youtu.be/xfuSdAcusfw)
 
