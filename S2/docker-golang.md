@@ -144,6 +144,8 @@ U nastavku sledi kompleksniji primer u kom pokrećemo više servisa od jednom:
 [Multistage build](https://youtu.be/_EYy81VGrJ0)  
 [Primer docker-compose.yaml sa više servisa i env varijablama](https://youtu.be/gtnnIr3aET4)  
 
+Primer je dostupan na sledećem <a href='https://github.com/lukaDoric/SOA/tree/main/S2/go_primeri/WebServerWithDB'>link-u</a>.
+
 U prethodnom poglavljima je objašnjena manipulacija ​volume-​a, kako kreirati sopstvenu sliku i kako od nje kreirati kontejner. Međutim, postavlja se pitanje šta raditi ukoliko imamo više aplikacija, od kojih je neke neophodno pokrenuti u više instanci (kontejnera), koji moraju da komuniciraju međusobno. Tada pojedinačno kreiranja slika i pokretanja kontejnera nije praktično rešenje. Zato se koristi alat `docker compose` ​koji nam omogućuje pokretanje i zaustavljanje ​više aplikacija koristeći jednu komandu, kao i zejdnički ispis logova svih aplikacija na jedan terminal.
 
 Sve što je neophodno jeste da kreiramo fajl pod nazivom `docker-compose.yml`​ U folderu `go-primeri/WebServerWithDB` i `nginx-example` možete videti kako treba ovaj fajl da izgleda
