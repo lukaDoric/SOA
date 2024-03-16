@@ -25,7 +25,8 @@ Njegove osnovne komponente su:
 - Docker Images
 - Registries (Docker Hub)
 - Docker containers
-- Docker Swarm
+
+### 2.1 Docker engine
 
 Kada pričamo o Docker Engine-u, govorimo o klasičnoj klijent-server aplikaciji. Docker klijent nam pruža CLI (command line interface) putem kojeg unosimo komande na osnovu kojih se generišu API request-ovi koji se šalju serveru (Docker daemon-u) koji ih obrađuje.
 
@@ -37,7 +38,7 @@ Na sledećim linkovima možeš pogledati video snimke o Docker-u:
 [Uvod u Docker](https://youtu.be/MAivaLjKDaY)  
 [Interna arhitektura Docker-a](https://youtu.be/nat6d-kNTGU)
 
-<h2>3. Šta su Docker slike?</h2>
+### 2.2 Docker slike
 
 Generalno je poznat koncept slike kada je priča o virtuelnim mašinama. Za sličnu stvar se koriste i Docker slike, odnosno predstavljaju build-time konstrukt od kojih nastaju kontejneri, ali se tu sličnost završava. Docker slike predstavljaju skup read-only layer-a gde svaki sloj predstavlja različitosti u fajlsistemu u odnosu na prethodni sloj, pri čemu uvek postoji jedan bazni (base) sloj. Upotrebom storage driver-a skup svih slojeva čini root filesystem kontejnera, odnosno svi slojevi izgledaju kao jedan unificirani fajlsistem. Pojednostavljeno docker slike čine templejt na osnovu kog se kreira docker kontejner.
 
@@ -55,13 +56,13 @@ Na sledećim linkovima možeš pogledati video snimke o docker slikama:
 [Uvod u Docker slike](https://youtu.be/LsjntJHEe_8)  
 [Prva Docker slika](https://youtu.be/xfuSdAcusfw)
 
-<h2>4. Odakle se preuzimaju postojeće slike?</h2>
+### 2.3 Docker registri
 
 Docker čuva slike u registrima, pri čemu postoje dva tipa odnosno javni i privatni. Javni registar kojim upravlja Docker Inc. se zove DockerHub i na njemu svako može da napravi nalog i da tamo čuva i deli sopstvene slike. Postoje dva tipa slika a to su oficijelne koje žive na top nivou DockerHub namespace-a (npr. Ubuntu, Redis itd.) i neoficijelne (korisničke). Takođe je moguće napraviti privatni registar u kome se mogu čuvati slike i sve to sakriti iza firewall-a što je ponekad neophodno za pojedine organizacije.
 
 Postojeći Docker registri nude mesto gde korisnici mogu da preuzmu već postojeće slike koje su kreirali drugi korisnici ili organizacije. Ovo omogućava brzo deljenje i razvoj aplikacija, jer korisnici mogu da iskoriste prethodno kreirane slike kao osnovu za svoje aplikacije ili da jednostavno pokrenu servise potrebne za svoje aplikacije bez potrebe da sami kreiraju sve od početka. Oficijelne slike na DockerHub-u su verifikovane i pružaju siguran temelj za izgradnju kontejnerizovanih aplikacija, dok neoficijelne slike pružaju širok spektar alata i aplikacija koje je zajednica razvila.
 
-<h2>5. Šta predstavljaju kontejneri?</h2>
+### 2.4 Docker kontejneri
 
 Kako slike predstavljaju build-time konstrukt (templejt), tako su kontejneri run-time konstrukt (pokreću se na osnovu templejta). Gruba analogija odnosa između slike i kontejnera se može posmatrati kao klasa i instanca te klase. Kontejneri predstavljaju lightweight execution environment koji omogućuju izolovanje aplikacije i njenih zavisnosti koristeći `kernel namespaces` i `cgroups` mehanizme.
 
