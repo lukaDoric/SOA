@@ -32,7 +32,8 @@ Kada pričamo o Docker Engine-u, govorimo o klasičnoj klijent-server aplikaciji
 
 ![image-002](https://github.com/lukaDoric/SOA/assets/45179708/c0e4918a-0c78-4abb-9184-3003b54d9f4f)
 
-Sam Docker daemon je nakon refaktorisanja (zbog toga što je narastao u jedan veliki monolit) ostao bez ikakvog koda koji zaista kreira i pokreće kontejnere. On se obraća putem gRPC API-a preko lokalnog Linux socket-a `containerd`-u (long running daemon-u) koji predstavlja "API fasadu" koja omogućuje startovanje containerd-shim-a odnosno roditeljskog procesa za svaki kontejner gde runc (container runtime) vrši kreiranje kontejnera. Sloj ispod containerd-a vrši kompletan rad sa kernelom odnosno koristi njegove funkcije. Iako arhitektura izgleda prilično kompleksno, ovakva podela omogućuje da se pojedine komponente bez ikakvih problema zamenjuju a da to ne utiče na pokrenute kontejnere što sa administratorske tačke gledišta puno olakšava stvari. Na primer, moguće je promeniti verziju Docker-a a da se pri tome ne moraju zaustavljati već pokrenuti kontejneri.
+Sam Docker daemon je nakon refaktorisanja (zbog toga što je narastao u jedan veliki monolit) ostao bez ikakvog koda koji zaista kreira i pokreće kontejnere. On se obraća putem gRPC API-a preko lokalnog Linux socket-a `containerd`-u (long running daemon-u) koji predstavlja "API fasadu" koja omogućuje startovanje containerd-shim-a odnosno roditeljskog procesa za svaki kontejner gde runc (container runtime) vrši kreiranje kontejnera. Sloj ispod containerd-a vrši kompletan rad sa kernelom odnosno koristi njegove funkcije.  
+Iako arhitektura izgleda prilično kompleksno, ovakva podela omogućuje da se pojedine komponente bez ikakvih problema zamenjuju a da to ne utiče na pokrenute kontejnere što sa administratorske tačke gledišta puno olakšava stvari. Na primer, moguće je promeniti verziju Docker-a a da se pri tome ne moraju zaustavljati već pokrenuti kontejneri.
 
 Na sledećim linkovima možeš pogledati video snimke o Docker-u:  
 [Uvod u Docker](https://youtu.be/MAivaLjKDaY)  
@@ -40,7 +41,7 @@ Na sledećim linkovima možeš pogledati video snimke o Docker-u:
 
 ### 2.2 Docker slike
 
-Generalno je poznat koncept slike kada je priča o virtuelnim mašinama. Za sličnu stvar se koriste i Docker slike, odnosno predstavljaju build-time konstrukt od kojih nastaju kontejneri, ali se tu sličnost završava. Docker slike predstavljaju skup read-only layer-a gde svaki sloj predstavlja različitosti u fajlsistemu u odnosu na prethodni sloj, pri čemu uvek postoji jedan bazni (base) sloj. Upotrebom storage driver-a skup svih slojeva čini root filesystem kontejnera, odnosno svi slojevi izgledaju kao jedan unificirani fajlsistem. Pojednostavljeno docker slike čine templejt na osnovu kog se kreira docker kontejner.
+Generalno je poznat koncept slike kada je priča o virtuelnim mašinama. Za sličnu stvar se koriste i Docker slike, odnosno predstavljaju build-time konstrukt od kojih nastaju kontejneri, ali se tu sličnost završava. Pojednostavljeno docker slike čine templejt na osnovu kog se kreira docker kontejner. Docker slike predstavljaju skup read-only layer-a gde svaki sloj predstavlja različitosti u fajlsistemu u odnosu na prethodni sloj, pri čemu uvek postoji jedan bazni (base) sloj. Upotrebom storage driver-a skup svih slojeva čini root filesystem kontejnera, odnosno svi slojevi izgledaju kao jedan unificirani fajlsistem.
 
 ![image-003](https://github.com/lukaDoric/SOA/assets/45179708/cbc05507-5818-4642-8c54-850bd7136e81)
 
@@ -51,10 +52,6 @@ Svi ovi read-only slojevi predstavljaju osnovu za svaki kontejner koji se pokre�
 ![image-005](https://github.com/lukaDoric/SOA/assets/45179708/f8271035-8fad-40cd-931b-941f81c69d8a)
 
 Ovakav mehanizam se zove Copy-on-write i delom čini Docker zaista moćnim. Koliko god kontejnera da kreiramo, read-only slojevi će uvek biti isti, tj. ostaće nepromenjeni, samo će svaki kontejner dobiti sopstveni read-write sloj. Na ovaj način se štedi jako puno prostora na disku jer kada smo jednom preuzeli/kreirali sliku, koliko god kontejnera da pokrenemo, slika ostaje apsolutno nepromenjena.
-
-Na sledećim linkovima možeš pogledati video snimke o docker slikama:  
-[Uvod u Docker slike](https://youtu.be/LsjntJHEe_8)  
-[Prva Docker slika](https://youtu.be/xfuSdAcusfw)
 
 ### 2.3 Docker registri
 
