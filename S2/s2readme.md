@@ -6,6 +6,6 @@ Na osnovu arhitekture sa prve KT (početna monolitna aplikacija i dva izolovana 
 1.2 Potrebno je napisati docker compose fajl koji uključuje u sebe podizanje sva tri servisa i odgovarajuće baze podataka.  
 1.3 Potrebno je omogućiti komunikaciju između izolovanih kontejnera i od frontenda do kontejnera monolitne aplikacije.  
 
-<a href=''>Teorijske osnove Docker-a.</a>   
-<a href=''>Primer rada sa Docker-om (Golang).</a>  
-<a href=''>Primer rada sa Docker-om (.NET).</a>   
+<a href='https://github.com/lukaDoric/SOA/blob/main/S2/docker.md'>Teorijske osnove Docker-a.</a>   
+<a href='https://github.com/lukaDoric/SOA/blob/main/S2/docker-golang.md'>Primer rada sa Docker-om (Golang).</a>  
+<a href='https://github.com/lukaDoric/SOA/blob/main/S2/docker-compose-NET.md'>Primer rada sa Docker-om (.NET).</a>   
