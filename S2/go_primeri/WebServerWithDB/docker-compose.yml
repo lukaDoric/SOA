@@ -1,0 +1,38 @@
+version: "3.7"
+services:
+  servers:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    image: students_web_server
+    container_name: student_server
+    restart: always
+    networks:
+      - servers
+    ports:
+      - 8080:8080
+    depends_on:
+      - database
+  
+  database:
+    image: mysql
+    container_name: mysql
+    restart: always
+    networks:
+      - servers
+    ports:
+      - 4000:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: students
+    volumes:
+      - database-data:/var/lib/mysql
+
+volumes:
+  database-data:
+    name: server-database
+
+networks:
+  servers:
+    name: servers
+    driver: bridge
