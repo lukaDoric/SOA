@@ -1,7 +1,4 @@
 
-Na sledećim linkovima možeš pogledati video snimke o docker slikama:  
-[Prva Docker slika](https://youtu.be/xfuSdAcusfw)
-
 <h1>Docker</h1>
 
 <h2>Video materijal koji prati ovu lekciju:</h2>
@@ -86,6 +83,8 @@ Neke od vrlo korisnih komandi:
 Postoji naravno još komandi i puno dodatnih flegova za svaku komandu, i dodatne informacije o svakoj se mogu naći u odličnoj zvaničnoj dokumentaciji: [https://docs.docker.com/engine/reference/commandline/docker/](https://docs.docker.com/engine/reference/commandline/docker/)
 
 <h2>7. Kako kreirati sopstvene slike?</h2>
+
+Kreiranje prve docker slike: [Prva Docker slika](https://youtu.be/xfuSdAcusfw)
 
 Videli smo kako da pokrenemo kontejnere na osnovu već postojećih slika, ali ono što nas konkretno interesuje jeste kako da kreiramo sopstvene slike i da pomoću njih pokrenemo naše kontejnere u kojima će se izvršavati neki konkretan mikroservis (u primeru neka Spring-Boot aplikacija). Za potrebe kreiranja naše slike neophodno je da kreiramo Dockerfile (sa tim nazivom) odnosno tekstualnu datoteku (najbolja praksa je da se ona nalazi u root direktorijumu projekta) koja koristi bazični DSL sa instrukcijama za kreiranje slika. Kada kreiramo taj fajl, komandom docker image build ćemo kreirati našu sliku izvršavanjem instrukcija koje smo napisali, i zatim ćemo od te slike startovati kontejner.
 
