@@ -3,7 +3,7 @@
 Na osnovu arhitekture sa prve KT (početna monolitna aplikacija i dva izolovana servisa) potrebno je:  
 1. Dokerizovati čitav bekend deo (frontend nije potrebno dokerizovati).  
 1.1 Potrebno je napisati Dockerfile za svaki servis (monolitnu i dva izolovana servisa).  
-1.2 Potrebno je napisati docker compose fajl za sva tri servisa i baze podataka.  
+1.2 Potrebno je napisati docker compose fajl koji uključuje u sebe podizanje sva tri servisa i odgovarajuće baze podataka.  
 1.3 Potrebno je omogućiti komunikaciju između izolovanih kontejnera i od frontenda do kontejnera monolitne aplikacije.  
 
 <a href=''>Teorijske osnove Docker-a.</a>   
