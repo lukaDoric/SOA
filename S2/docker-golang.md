@@ -16,7 +16,7 @@ Na sledećim linkovima možeš pogledati video snimke o docker slikama:
 
 [Primer docker-compose.yaml sa više servisa i env varijablama](https://youtu.be/gtnnIr3aET4)
 
-<h2>6. Kako raditi sa kontejnerima?</h2>
+<h2> Kako raditi sa kontejnerima?</h2>
 
 Pre nego što bi mogli bilo šta da radimo sa kontejnerima neophodno je izvršiti instalaciju Docker.
 
@@ -90,11 +90,6 @@ Postoji naravno još komandi i puno dodatnih flegova za svaku komandu, i dodatne
 Videli smo kako da pokrenemo kontejnere na osnovu već postojećih slika, ali ono što nas konkretno interesuje jeste kako da kreiramo sopstvene slike i da pomoću njih pokrenemo naše kontejnere u kojima će se izvršavati neki konkretan mikroservis (u primeru neka Spring-Boot aplikacija). Za potrebe kreiranja naše slike neophodno je da kreiramo Dockerfile (sa tim nazivom) odnosno tekstualnu datoteku (najbolja praksa je da se ona nalazi u root direktorijumu projekta) koja koristi bazični DSL sa instrukcijama za kreiranje slika. Kada kreiramo taj fajl, komandom docker image build ćemo kreirati našu sliku izvršavanjem instrukcija koje smo napisali, i zatim ćemo od te slike startovati kontejner.
 
 Format je relativno jednostavan, i instrukcije koje postoje su:
-
-```docker
-# Comment
-INSTRUCTION arguments
-```
 
 - **FROM** Pomoću ove instrukcije definišemo koja je bazna slika za predstojeće instrukcije koje će biti izvršene. Svaki fajl mora početi FROM instrukcijom, s tim što je moguće imati više FROM instrukcija u istom Dockerfile-u. Bazična slika bi trebala da bude oficijelna i po potrebi sa latest tagom jer su te slike proverene.
 - **ADD** Ova instrukcija kopira fajlove sa zadate destinacije u fajlsistem slike na odredišnoj destinaciji (biće dodat novi sloj u slici).
