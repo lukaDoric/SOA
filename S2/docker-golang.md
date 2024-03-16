@@ -1,7 +1,5 @@
 
-<h1>Docker</h1>
-
-<h2> Kako raditi sa kontejnerima?</h2>
+<h1>Uvod u rad sa kontejnerima (Golang)</h1>
 
 Pre nego što bi mogli bilo šta da radimo sa kontejnerima neophodno je izvršiti instalaciju Docker.
 
