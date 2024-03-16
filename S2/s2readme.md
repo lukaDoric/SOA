@@ -9,3 +9,6 @@ Na osnovu arhitekture sa prve KT (početna monolitna aplikacija i dva izolovana 
 <a href='https://github.com/lukaDoric/SOA/blob/main/S2/docker.md'>Teorijske osnove Docker-a.</a>   
 <a href='https://github.com/lukaDoric/SOA/blob/main/S2/docker-golang.md'>Primer rada sa Docker-om (Golang).</a>  
 <a href='https://github.com/lukaDoric/SOA/blob/main/S2/docker-compose-NET.md'>Primer rada sa Docker-om (.NET).</a>   
+
+Napomena: U materijalima ima i primer za dokerizaciju servisa pisanih u Javi.  
+Ukoliko ste krenuli razvoj projekta od modularnog monolita (.NET) savet je da kada pogledate sve materijale samo proširite poslednji (.NET) primer i njegov compose sa dodatna dva servisa.
