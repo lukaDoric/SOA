@@ -133,10 +133,10 @@ Ako hoćemo preko dockera da pokrenemo kompleksniju go aplikaciju koja komunicir
 
 Bazna slika više nije `FROM alpine` već `FROM golag:alpine`. Ova druga slika u sebi sadrži go kompajler, te ćemo moći od go source koda da napravimo executable datoteku. Samim tim će slika koju dobijemo koristeći novu verziju Dockerfile-a zauzimati više memorija, zbog dodatnih alata koji će biti prisutni. Pored ove promene, takođe bi morali da podesimo komunikaciju između naše golang aplikacije i mysql baze podataka. Više ne možemo da se povezujemo na "localhost:3306" iz aplikacije, jer u okviru virtualne mašine (kontejnera) gde je pokrenut veb server ne postoji baza podataka. Bazu želimo da podignemo u zasebnom kontejneru, kako bi izolovali rad aove dve nezavisne aplikacije. Da bi omogućili komunikaciju između 2 kontejnera možemo koristiti Docker mreže, što ćemo videti u 9. poglavlju zajedno za `docker compose` alatom.
 
-Napredne stvari:
+Napredne stvari:  
 
-● [Multi-stage build](https://docs.docker.com/develop/develop-images/multistage-build/)
-● [Kreiranje base slike](https://docs.docker.com/develop/develop-images/baseimages/)
+● [Multi-stage build](https://docs.docker.com/develop/develop-images/multistage-build/)  
+● [Kreiranje base slike](https://docs.docker.com/develop/develop-images/baseimages/)  
 
 <h2>8. Docker volumes</h2>
 
@@ -222,18 +222,3 @@ Još jedan bitan detalj na koji bi skrenuli pažnju: Ako odete u `main.go` fajl 
 Pozicioniramo se na putanju do direktorijuma u kojem se nalazi `docker-compose.yml` i pozovemo naredbu: `​docker compose up --build`​ Sa ovim pokrećemo sve naše servise (kontejnere).
 
 <img width="1501" alt="Screenshot 2024-03-15 at 18 28 59" src="https://github.com/lukaDoric/SOA/assets/45179708/2f9530fd-db6f-4cea-94f9-704e5985ca5e">
-
-<h2>10. Docker Swarm</h2>
-
-Docker ​Swarm je alat koji omogućava orkestraciju nad kontejnerima. ​Docker Swarm​ 
-ima implementiran l​oad balancer ​i ​discovery service, ​servisi koji su neophodni u mikroservisnoj arhitekturi. Za aktiviranje ​Docker Swarm-​a neophodno je podesit ​Docker da radi u ​swarm režimu komandom: `​docker swarm init`.​ Za pokretanje prethodnog primera pomoću ​Docker Swarm-​a, neophodne je dopuniti određene stvari u `docker-compose.yml` fajlu.
-
-U fajlu je dodata `​deploy` ​sekcija koja govori kako treba da se uradi ​deployment​servisa:
-- **replicas​** koliko instaci kontejnera treba da bude aktivno
-- **parallelism​** i **​delay**​  ukoliko broj aktivnih kontejnera manji od specifiranog, ​Docker pokreće nove instance kontejnera dok ne postigne željeni broj. Ova sekcija definiše kako je to potrebno postići. Na primer ukoliko definišemo *r​eplicas*​: 10, *parallelism*: 2 i *delay*: 10s, u slučaju da su pali svih 10 kontejnera, ​Docker​će istovremeno podizati 2 kontejnera pri čemu će nakog uspešnog podizanja oba kontejnera sačekati 10 sekundi i opet pokušavati da podigne istovremeno 2 kontejnera. Ovaj proces se ponavlja sve dok se ne postigne željeni broj instanci kontejnera.
-- **restart_policy**​ definiše pod kojim okolnostima je neophodno podizati nove kontejnere.
-  
-Pokretanje se vrši pomoću naredne komande (​*demo​* predstavlja naziv ​stack-​a koji može biti proizvoljan, dok -​c f​lagom definišemo putanju do ​yml ​fajla):
-`docker stack deploy -c stack-file.yml demo`
-Za praćenje stanja servisa neophodne je izvršiti narednu komandu:
-`docker stack services demo`
