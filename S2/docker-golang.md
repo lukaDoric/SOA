@@ -1,18 +1,6 @@
 
 <h1>Docker</h1>
 
-<h2>Video materijal koji prati ovu lekciju:</h2>
-
-[Docker slika za servis i bazu podataka](https://youtu.be/8cyjjYR6LzY)
-
-[Pravilan redosled komandi prilikom definisanja Docker slike](https://youtu.be/bogpeVjMIKE)
-
-[Multistage build](https://youtu.be/_EYy81VGrJ0)
-
-[docker compose](https://youtu.be/LnP4ibmKhIg)
-
-[Primer docker-compose.yaml sa više servisa i env varijablama](https://youtu.be/gtnnIr3aET4)
-
 <h2> Kako raditi sa kontejnerima?</h2>
 
 Pre nego što bi mogli bilo šta da radimo sa kontejnerima neophodno je izvršiti instalaciju Docker.
@@ -149,7 +137,14 @@ Kreiranje ​volume-​a je moguće odraditi sa komandom `​docker volume creat
 
 Na slici je prikazano najpre kreiranje ​volume-​a, a zatim je pokrenut kontejner kome smo ​mount​-ovali prethodno kreirani ​volume na putanji ​nekiPodaci.​U okviru prvog kontejnera smo i kreirali običan tekstualni fajl. Zatim smo izvršili ​exit (​ugasili glavni proces /​bin/bash ​i samim tim i ugasili kontejner) i pokrenuli nov kontejner kome smo takođe ​mount​-ovali isti ​volume na istoj putanji (apsolutno ne mora biti ista) i kada smo ušli u sam folder, datoteka koju smo prethodno kreirali iz totalno drugog kontejnera i dalje postoji.
 
-<h2>9. Šta raditi sa ostalim mikroservisima?</h2>
+<h2>Šta raditi sa ostalim mikroservisima?</h2>
+
+U nastavku sledi kompleksniji primer u kom pokrećemo više servisa od jednom:  
+[Docker slika za servis i bazu podataka](https://youtu.be/8cyjjYR6LzY)  
+[docker compose](https://youtu.be/LnP4ibmKhIg)  
+[Pravilan redosled komandi prilikom definisanja Docker slike](https://youtu.be/bogpeVjMIKE)  
+[Multistage build](https://youtu.be/_EYy81VGrJ0)  
+[Primer docker-compose.yaml sa više servisa i env varijablama](https://youtu.be/gtnnIr3aET4)  
 
 U prethodnom poglavljima je objašnjena manipulacija ​volume-​a, kako kreirati sopstvenu sliku i kako od nje kreirati kontejner. Međutim, postavlja se pitanje šta raditi ukoliko imamo više aplikacija, od kojih je neke neophodno pokrenuti u više instanci (kontejnera), koji moraju da komuniciraju međusobno. Tada pojedinačno kreiranja slika i pokretanja kontejnera nije praktično rešenje. Zato se koristi alat `docker compose` ​koji nam omogućuje pokretanje i zaustavljanje ​više aplikacija koristeći jednu komandu, kao i zejdnički ispis logova svih aplikacija na jedan terminal.
 
