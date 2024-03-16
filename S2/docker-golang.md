@@ -141,7 +141,7 @@ Na slici je prikazano najpre kreiranje ​volume-​a, a zatim je pokrenut konte
 
 U nastavku sledi kompleksniji primer u kom pokrećemo više servisa od jednom:  
 [Docker slika za servis i bazu podataka](https://youtu.be/8cyjjYR6LzY)  
-[docker compose](https://youtu.be/LnP4ibmKhIg)  
+[Docker compose](https://youtu.be/LnP4ibmKhIg)  
 [Pravilan redosled komandi prilikom definisanja Docker slike](https://youtu.be/bogpeVjMIKE)  
 [Multistage build](https://youtu.be/_EYy81VGrJ0)  
 [Primer docker-compose.yaml sa više servisa i env varijablama](https://youtu.be/gtnnIr3aET4)  
