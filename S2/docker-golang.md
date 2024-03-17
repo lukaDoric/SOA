@@ -32,7 +32,7 @@ Sa komandom `docker ps` smo zatražili izlistavanje svih pokrenutih kontejnera.
 
 <img width="1500" alt="Screenshot 2024-03-15 at 12 41 32" src="https://github.com/lukaDoric/SOA/assets/45179708/eb6990a4-3b8d-4a41-adce-177f4fb188ff">
 
-S obzirom da smo sa exit ugasili glavni proces našeg kontejnera (samim tim i njega), prilikom izvršenja gorepomenute komande neće biti izlistane informacije o kontejneru. Dodavanjem flega -a izlistavamo i pokrenute i zaustavljene kontejnere dok sa flegom -l izlistavamo informacije o poslednjem kontejneru koji je bio pokrenut bez obzira da li je i dalje pokrenut ili je zaustavljen. Sa flegom -n x slična priča kao i sa -l, s tim što ovde eksplicitno naglašavamo za koliko kontejnera želimo da vidimo informacije. Konkretne stvari koje nam se prikazuju jesu:
+S obzirom da smo sa exit ugasili glavni proces našeg kontejnera (samim tim i njega), prilikom izvršenja gorepomenute komande neće biti izlistane informacije o kontejneru. Dodavanjem flega -a (docker ps -a) izlistavamo i pokrenute i zaustavljene kontejnere dok sa flegom -l izlistavamo informacije o poslednjem kontejneru koji je bio pokrenut bez obzira da li je i dalje pokrenut ili je zaustavljen. Sa flegom -n x slična priča kao i sa -l, s tim što ovde eksplicitno naglašavamo za koliko kontejnera želimo da vidimo informacije. Konkretne stvari koje nam se prikazuju jesu:
 
 - **ID** - Identifikator kontejnera.
 - **IMAGE** - Slika od koje je kreiran kontejner.
