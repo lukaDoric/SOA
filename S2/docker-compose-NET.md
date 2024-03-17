@@ -117,7 +117,7 @@ Komandom docker-compose up u okviru tourism-be foldera ćemo podići svu potrebn
 
 ![image](https://github.com/lukaDoric/SOA/assets/57589408/5fed68d8-e5c6-4f27-9dd1-61242ce1b5c7)
   
-Potom je potrebno pokrenuti komandu docker-compose -f docker-compose-migration.yml up kako bi migrirali podatke (ispratiti u konzoli da su sve migracije prošle). Nakon toga možemo se zakačiti na postgres kontejner da vidimo da li su tu sve tabele koje bi trebale da budu. Komanda je docker exec -it <ID-KONTEJNERA-ZA-BAZU> bash.  
+Potom je potrebno pokrenuti komandu docker-compose -f docker-compose-migration.yml up kako bi migrirali podatke (ispratiti u konzoli da su sve migracije prošle). Nakon toga možemo se zakačiti na postgres kontejner da vidimo da li su tu sve tabele koje bi trebale da budu. Komanda je docker exec -it ID-KONTEJNERA-ZA-BAZU bash.  
 
 ![image](https://github.com/lukaDoric/SOA/assets/57589408/4c3deff8-1d15-420b-91c8-573dba8982fc)  
 
@@ -147,7 +147,7 @@ if (app.Environment.IsDevelopment())
 ```
 kako bi nam se swagger pokrenuo i u produkcionom okruženju.  
 
-Na kraju možemo popuniti bazu podacima komandom docker exec -it <ID-KONTEJNERA-ZA-BAZU> psql -U postgres -d explorer -f /tmp/explorer-init.sql  
+Na kraju možemo popuniti bazu podacima komandom docker exec -it ID-KONTEJNERA-ZA-BAZU psql -U postgres -d explorer -f /tmp/explorer-init.sql  
 
 ![image](https://github.com/lukaDoric/SOA/assets/57589408/d0856479-6c94-4711-abdb-cedf487ff09d)  
 
