@@ -1,7 +1,7 @@
 
 <h1>Uvod u rad sa kontejnerima (Golang)</h1>
 
-Pre nego što bi mogli bilo šta da radimo sa kontejnerima neophodno je izvršiti instalaciju Docker.
+Pre nego što bi mogli bilo šta da radimo sa kontejnerima neophodno je izvršiti instalaciju Docker-a.
 
 Detaljna uputstva za instaliranje Docker-a:
 - [Linux](https://docs.docker.com/engine/install/ubuntu/)
