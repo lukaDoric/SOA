@@ -117,14 +117,14 @@ Ukoliko ukucamo komandu `docker images`, kreirana slika će nam biti prikazana k
 
 Ako hoćemo preko dockera da pokrenemo kompleksniju go aplikaciju koja komunicira sa bazom podataka, moramo promeniti nekoliko stvari. Za početak menjamo Dockerfile.
 
-Bazna slika više nije `FROM alpine` već `FROM golag:alpine`. Ova druga slika u sebi sadrži go kompajler, te ćemo moći od go source koda da napravimo executable datoteku. Samim tim će slika koju dobijemo koristeći novu verziju Dockerfile-a zauzimati više memorija, zbog dodatnih alata koji će biti prisutni. Pored ove promene, takođe bi morali da podesimo komunikaciju između naše golang aplikacije i mysql baze podataka. Više ne možemo da se povezujemo na "localhost:3306" iz aplikacije, jer u okviru virtualne mašine (kontejnera) gde je pokrenut veb server ne postoji baza podataka. Bazu želimo da podignemo u zasebnom kontejneru, kako bi izolovali rad aove dve nezavisne aplikacije. Da bi omogućili komunikaciju između 2 kontejnera možemo koristiti Docker mreže, što ćemo videti u 9. poglavlju zajedno za `docker compose` alatom.
+Bazna slika više nije `FROM alpine` već `FROM golag:alpine`. Ova druga slika u sebi sadrži go kompajler, te ćemo moći od go source koda da napravimo executable datoteku. Samim tim će slika koju dobijemo koristeći novu verziju Dockerfile-a zauzimati više memorija, zbog dodatnih alata koji će biti prisutni. Pored ove promene, takođe bi morali da podesimo komunikaciju između naše golang aplikacije i mysql baze podataka. Više ne možemo da se povezujemo na "localhost:3306" iz aplikacije, jer u okviru virtualne mašine (kontejnera) gde je pokrenut veb server ne postoji baza podataka. Bazu želimo da podignemo u zasebnom kontejneru, kako bi izolovali rad aove dve nezavisne aplikacije. Da bi omogućili komunikaciju između 2 kontejnera možemo koristiti Docker mreže, što ćemo videti u poslednjem poglavlju ove lekcije zajedno za `docker compose` alatom.
 
 Napredne stvari:  
 
 ● [Multi-stage build](https://docs.docker.com/develop/develop-images/multistage-build/)  
 ● [Kreiranje base slike](https://docs.docker.com/develop/develop-images/baseimages/)  
 
-<h2>8. Docker volumes</h2>
+<h2>Docker volumes</h2>
 
 U poglavlju u kome su opisivane slike, bilo je reči o r​ead-only s​lojevima i read-write sloju koji se dodaju iznad prethodnih slojeva za svaki kontejner koji je pokrenut. Sve promene i sav sadržaj se upisuju u taj sloj. Problem sa tim jeste da kada se kontejner obrise, promene će biti potpuno izgubljene.
 Zato je ​Docker​ uveo koncept pod nazivom `​volumes`. D​a bi mogli da čuvamo konkretan sadržaj (​persist)​, i po potrebi ga delimo između različitih kontejnera, kreiramo poseban ​`volume` koji je, prosto rečeno, ništa drugo do skup direktorijuma/fajlova koji se nalaze izvan ​default-​nog docker  image file sistema i čiji sadržaj se čuva unutar fajl sistema host mašine, kako se ne bi obrisao nakon gašenja kontejnera.
