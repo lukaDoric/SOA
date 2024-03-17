@@ -38,12 +38,12 @@ CMD ["dotnet", "Explorer.API.dll"]
 8. Radimo build projekta unutar kontejnera.
 9. Zatim kreiramo novi stage 'publish' koji se zasniva na build stage-u.  
 10. Publish-ujemo .NET projekat u direktorijum /app/publish u okviru kontejnera.
-11. Postavljamo ENV varijablu na kojoj bi .NET aplikacija trebala da sluša u okviru kontejnera.  
+11. Kroz ENV varijablu postavljamo port na kojoj bi .NET aplikacija trebala da sluša u okviru kontejnera.  
 12. Kreiramo finalni stage.  
 13. Kopiramo sve iz publish stage-a u /app direktorijum u okviru kontejnera.  
 14. Najzad pokrećemo komandu za pokretanje .NET aplikacije.
 
-Drugi deo Dockerfile-a ima stage za migracije podataka i još uvek ga ne treba pokretati. Dockerfile koji je opisan iznad se koristi za podizanje kontejnera u kom će se pokretati naša monolitna aplikacija (.NET), ovaj Dockerfile biće korišćen od strane docker-compose.yml fajla objašnjenog u nastavku.  
+Drugi deo Dockerfile-a ima stage za migraciju baze podataka i još uvek ga ne treba pokretati. Dockerfile koji je opisan iznad se koristi za podizanje kontejnera u kom će se pokretati naša monolitna aplikacija (.NET), ovaj Dockerfile biće korišćen od strane docker-compose.yml fajla objašnjenog u nastavku.  
 
 ## docker-compose
 
