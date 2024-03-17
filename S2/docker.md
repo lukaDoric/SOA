@@ -68,7 +68,7 @@ Kako slike predstavljaju build-time konstrukt (templejt), tako su kontejneri run
 
 ![image-006](https://github.com/lukaDoric/SOA/assets/45179708/7657bc58-9b52-4e5e-a492-09839f6552e6)
 
-`Namespaces` nam omogućuju izolaciju, odnosno da podelimo naš operativni sistem na manje izolovanih virtuelnih operativnih sistema (kontejnera). Odnosno, kontejneri se ponašaju kao zasebni operativni sistemi (kao kod VM-a) samo što to nisu, jer svi dele isti kernel na host OS-u. Svaki kontejner ima sopstveni skup namespace-ova (kada pričamo o Linux-u to su namespace-ovi sa slike 6) pri čemu je njegov pristup ograničen isključivo na taj prostor imena, odnosno svaki kontejner nije uopšte svestan postojanja drugih kontejnera.
+`Namespaces` nam omogućuju izolaciju, odnosno da podelimo naš operativni sistem na manje izolovanih virtuelnih operativnih sistema (kontejnera). Odnosno, kontejneri se ponašaju kao zasebni operativni sistemi (kao kod VM-a) samo što to nisu, jer svi dele isti kernel na host OS-u. Svaki kontejner ima sopstveni skup namespace-ova (kada pričamo o Linux-u to su namespace-ovi sa slike) pri čemu je njegov pristup ograničen isključivo na taj prostor imena, odnosno svaki kontejner nije uopšte svestan postojanja drugih kontejnera.
 
 ![image-007](https://github.com/lukaDoric/SOA/assets/45179708/22ddf7dc-1f88-4fb6-8c50-09676f6b2bea)
 
