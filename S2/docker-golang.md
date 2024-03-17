@@ -16,7 +16,7 @@ Napomena: Ukoliko ne želite da izvršavate Docker naredbe sa povišenim privile
 
 Rezultat naredbe jesu informacije o broju kontejnera, broju slika, ​storage driver-​u i ostalim bazičnim konfiguracijama.
 
-Ukoliko želimo da pokrenemo neki kontejner kucamo komandu: docker run naziv_slike. U konkretnom slučaju otkucaćemo: `docker run -i -t ubuntu /bin/bash`
+Ukoliko želimo da pokrenemo neki kontejner kucamo komandu: docker run naziv_slike. U konkretnom slučaju otkucaćemo: `docker run -i -t ubuntu /bin/bash` (ukoliko vam izlazi na Windowsu greška vezana za wimpty pokrenite komandu kroz powershell terminal)
 
 <img width="861" alt="Screenshot 2024-03-15 at 12 39 11" src="https://github.com/lukaDoric/SOA/assets/45179708/0dbf8d53-e2e3-4ccb-92a3-ee97b6a11d65">
 
