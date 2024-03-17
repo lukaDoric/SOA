@@ -210,7 +210,7 @@ kontejneru.
     - **depends_on** Govori prilikom pokretanja servisa koje su zavisnosti
 između njih, odnosno koji servisi moraju biti pokrenuti pre nego što se pokrene konkretan servis.
 
-Za dodatne direktive i njihove vrednosti možete pogledati u zvaničnoj [dokumentaciji ](https://docs.docker.com/compose/)
+Za dodatne direktive i njihove vrednosti možete pogledati u zvaničnoj [dokumentaciji ](https://docs.docker.com/compose/).  
 ​
 Još jedan bitan detalj na koji bi skrenuli pažnju: Ako odete u `main.go` fajl u primeru `WebServerWithDB`, videćete da baza više nije na localhost adresi, već database. Servisi koji su u istoj mreži unutar docker-a mogu komunicirati preko svog imena umesto ip adrese.
 
