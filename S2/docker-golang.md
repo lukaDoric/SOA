@@ -22,7 +22,7 @@ Ukoliko želimo da pokrenemo neki kontejner kucamo komandu: docker run naziv_sli
 
 Dakle, šta se najpre dogodilo? Docker nije uspeo da pronađe sliku sa datim nazivom na lokalnom računaru pa se obratio javnom registru (DockerHub-u) i krenuo da povlači poslednju stable verziju (označena tagom latest) slike. Rekli smo da se slike sastoje iz više layer-a pa je preuzeo svaki sloj (linije koje se završavaju sa Pull complete). Nakon preuzimanja pokrenuo je nov kontejner. Ovde smo dodali i dva flega prilikom pokretanja komande. Fleg -i i -t. Prvi naglašava da je neophodno održati standard input (STDIN) dok drugi fleg dodeljuje pseudo terminal (terminal koji ima funkcije kao i pravi fizički terminal). Nakon naziva slike zadali smo i komandu koja je pokrenula Linux shell pri čemu nam se pokretanje kontejnera prikazuje kao na slici.
 
-Kada pokrenemo top komandu unutar kontejnera vidimo da je to jedini proces koji je zapravo pokrenut u našem kontejneru.
+Kada pokrenemo `top` komandu unutar kontejnera vidimo da je to jedini proces koji je zapravo pokrenut u našem kontejneru.
 
 <img width="861" alt="Screenshot 2024-03-15 at 12 39 55" src="https://github.com/lukaDoric/SOA/assets/45179708/340f6757-314e-4002-97d5-ee7184499a94">
 
