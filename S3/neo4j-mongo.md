@@ -119,6 +119,6 @@ WHERE ID(n) = 123
 DETACH DELETE n
 ```  
 
-U narednom <a href='https://www.youtube.com/watch?v=aL7mN_l2jLM'>videu</a> možeš pogledati osnovne komande nad mongo bazom.  
-U narednom <a href='https://www.youtube.com/watch?v=06ehbvxflL4'>videu</a> možeš pogledati integraciju mongo baze sa Golang-om.  
+U narednom <a href='https://www.youtube.com/watch?v=NkIjs4263e4'>videu</a> možeš pogledati osnovne komande nad mongo bazom.  
+U narednom <a href='https://www.youtube.com/watch?v=T7ihrC0ZuSM'>videu</a> možeš pogledati integraciju mongo baze sa Golang-om.  
 Primer je dostupan na sledećem <a href=''>link-u</a>.  
