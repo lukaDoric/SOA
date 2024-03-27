@@ -88,6 +88,6 @@ Oslanjajući se na primer iznad bilo bi logično da korisnika smestimo u users k
 
 Više možete pročitati na https://www.mongodb.com/document-databases.
 
-U narednom <a href='https://www.youtube.com/watch?v=aL7mN_l2jLM'>videu</a> možeš pogledati osnovne komande nad mongo bazom.
-U narednom <a href='https://www.youtube.com/watch?v=06ehbvxflL4'>videu</a> možeš pogledati integraciju mongo baze sa Golang-om.
-Primer je dostupan na sledećem <a href=''>link-u</a>.
+U narednom <a href='https://www.youtube.com/watch?v=aL7mN_l2jLM'>videu</a> možeš pogledati osnovne komande nad mongo bazom.  
+U narednom <a href='https://www.youtube.com/watch?v=06ehbvxflL4'>videu</a> možeš pogledati integraciju mongo baze sa Golang-om.  
+Primer je dostupan na sledećem <a href=''>link-u</a>.  
