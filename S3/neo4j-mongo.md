@@ -11,7 +11,7 @@ susedima - brz pristup na osnovu veza.
 3. Ne zahteva dodatne strukture za nove
 načine prolaska kroz graf.
 4. Brže izvršavanje, manje zauzeće
-memorije, pravljano namenski za
+memorije, pravljeno namenski za
 grafove.
 5. Lako skaliranje sa povećanjem
 podataka.
