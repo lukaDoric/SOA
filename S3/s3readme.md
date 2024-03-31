@@ -1,4 +1,4 @@
-## Treci sprint (01.04 - 22.04)
+## Treći sprint (01.04 - 22.04)
 
 Na osnovu dosadašnjeg izgrađenog projekta potrebno je:  
 1. Na nekom od bilo koja dva izolovana servisa zameniti SQL bazu <b>dokument NoSQL bazom</b> (preporuka MongoDB).  
