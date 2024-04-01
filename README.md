@@ -6,5 +6,5 @@ Repozitorijum za materijale koji podržavaju izradu projekta iz predmeta "Servis
 <a href='https://docs.google.com/spreadsheets/d/1IaycFUKvHsfi4cF8KV3DRMlh1QAr0VFRNddiYw0kuZs/edit#gid=0'>Spisak timova</a>.    
 
 Materijali za prvi sprint se nalaze <a href='https://github.com/lukaDoric/SOA/blob/main/S1/s1readme.md'>ovde</a>.  
-Materijali za drugi sprint se nalaze <a href='https://github.com/lukaDoric/SOA/blob/main/S2/s2readme.md'>ovde</a>.
+Materijali za drugi sprint se nalaze <a href='https://github.com/lukaDoric/SOA/blob/main/S2/s2readme.md'>ovde</a>.  
 Materijali za treći sprint se nalaze <a href='https://github.com/lukaDoric/SOA/tree/main/S3'>ovde</a>.
