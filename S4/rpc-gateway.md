@@ -57,7 +57,7 @@ nemamo ni jedan modul više prisutan, jer ovo treba da predstavlja samo ulaznu t
 
 ### Kreiranje API Gateway-a
 
-Prvi korak je da dodamo potrebne dependency u projekat kako bi radili sa gRPCem.  
+Prvi korak je da dodamo potrebne dependency-je u projekat kako bi radili sa gRPCem.  
 
 U okviru Explorer.API, u okviru ItemGroup elementa dodajemo sledeće:  
 
