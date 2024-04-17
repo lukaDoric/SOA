@@ -58,7 +58,8 @@ nemamo ni jedan modul više prisutan, jer ovo treba da predstavlja samo ulaznu t
 ### Kreiranje API Gateway-a
 
 Preporuka je preuzeti primer i kroz njega pratiti naredne korake. TODO: Dodati link.  
-Prvi korak je da dodamo potrebne dependency-je u projekat kako bi radili sa gRPCem.  
+
+1. Prvi korak je da dodamo potrebne dependency-je u projekat kako bi radili sa gRPCem.  
 
 U okviru Explorer.API, u okviru ItemGroup elementa dodajemo sledeće:  
 
@@ -78,16 +79,15 @@ U okviru PropertyGroup elementa, dodajemo sledeće:
 
     <IncludeHttpRuleProtos>true</IncludeHttpRuleProtos>  
 
-Nakon toga možemo napisati .proto specifikaciju za jedan kontroler koji će prihvatati kredencijale od korisnika
-po REST specifikaciji prevoditi taj zahtev u RPC poruku koju će proslediti izolovanom Stakeholders modulu.  
+Nakon toga možemo napisati .proto specifikaciju za jedan kontroler koji će prihvatati kredencijale od korisnika po REST specifikaciji prevoditi taj zahtev u RPC poruku koju će proslediti izolovanom Stakeholders modulu.  
 
-1. Kreiramo Protos folder u okviru Explorer.API-a.
-2. Preuzmite i skinite Google folder (iz okačenog primera) i ubacite u Protos folder.
+2. Kreiramo Protos folder u okviru Explorer.API-a.
+3. Preuzmite i skinite Google folder (iz okačenog primera) i ubacite u Protos folder.
 
 ![image](https://github.com/lukaDoric/SOA/assets/57589408/fb3c9612-ffbd-44d6-8b8e-770578a83ab2)
 
 
-3. Pišemo .proto specifikaciju u okviru authentication.proto fajla.
+4. Pišemo .proto specifikaciju u okviru authentication.proto fajla.
 
 ```code
 syntax = "proto3";
@@ -120,13 +120,13 @@ message AuthenticationTokens {
 }
 ```
 
-4. Stavljamo putanju do .proto specifikacije u okviru ItemGroup elementa - <Protobuf Include="Protos\authentication.proto" />
-5. Pokrećemo build komandu (u VisualStudio okruženju). 
+5. Stavljamo putanju do .proto specifikacije u okviru ItemGroup elementa - <Protobuf Include="Protos\authentication.proto" />
+6. Pokrećemo build komandu (u VisualStudio okruženju). 
 
 Napomena: Nakon ovog koraka možete resetovati okruženje jer nekad nije svesno novogenerisanih fajlova.
 Napomena: Sada u okviru src -> Explorer.API -> obj -> Debug -> net7.0 -> Protos treba da vidiš generisane proto specifikacije (Authentication.cs i AuthenticationGrpc.cs).
 
-6. Napravimo kontroler koji će implementirati proto specifikaciju (npr. AuthenticationProtoController, slika ispod).
+7. Napravimo kontroler koji će implementirati proto specifikaciju (npr. AuthenticationProtoController, slika ispod).
 
 ```code
 public class AuthenticationProtoController : Authorize.AuthorizeBase
@@ -159,9 +159,9 @@ public class AuthenticationProtoController : Authorize.AuthorizeBase
 }
 ````
 
-7. Obrati pažnju da kada kontaktiraš drugi mikroservis preko RPCa moraš koristiti sslPort tj. Http 2 protokol jer RPC samo na njemu funkcioniše. Kako bi izbegli rad sa sertifikatima, poturili smo opcije kroz httpHandler.
+8. Radimo override generisane metode po proto specifikaciji. Obrati pažnju da kada kontaktiraš drugi mikroservis preko RPCa moraš koristiti sslPort tj. Http 2 protokol jer RPC samo na njemu funkcioniše. Kako bi izbegli rad sa sertifikatima, poturili smo opcije kroz httpHandler.
 
-8. U Program.cs je potrebno dodati:  
+9. U Program.cs je potrebno dodati:  
   
 builder.Services.AddGrpc().AddJsonTranscoding();  
 app.MapGrpcService<AuthenticationProtoController>();
@@ -213,7 +213,7 @@ message AuthenticationTokens {
 Napomena: Nakon ovog koraka možete resetovati okruženje jer nekad nije svesno novogenerisanih fajlova.
 Napomena: Sada u okviru src -> Explorer.API -> obj -> Debug -> net7.0 -> Protos treba da vidiš generisane proto specifikacije.
 
-6. Napravimo kontroler koji će implementirati proto specifikaciju (npr. AuthenticationProtoController).
+6. Napravimo kontroler koji će implementirati proto specifikaciju tj. raditi override generisane metode.
 
 ```code
 
@@ -249,6 +249,7 @@ public class AuthenticationProtoController : Authorize.AuthorizeBase
 builder.Services.AddGrpc();
 app.MapGrpcService<AuthenticationProtoController>();
 
-Napomena: Sa obzirom da ima puno detalja (tj. na više mesta je potrebno staviti tačno određenu liniju koda, pogledati kako je urađeno u primerima)
+Napomena: Sa obzirom da ima puno detalja (tj. na više mesta je potrebno staviti tačno određenu liniju koda, pogledati kako je urađeno u primerima).
+Takođe u okviru API Gateway-a možete sve kontrolere koji implementiraju proto specifikaciju zaštiti kao i do sada određenim policy-em.
 
 Sada možemo da pokrenemo oba servisa (Gateway i Stakeholders), potom kontaktiramo API Gateway, po REST-u sa imenom i šifrom. On će preuzeti zahtev po REST-u, prevesti ga u RPC, kontaktirati Stakeholders mikroservis po RPC gde ćemo dobiti odgovor u vidu JWT-a i prevesti nazad odgovor korisniku po REST specifikaciji.
