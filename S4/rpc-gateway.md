@@ -28,7 +28,8 @@ gRPC ima mnoštvo korisnih plugina koje možete da iskoristite i postoji dosta d
 
 Primere za razne biblioteke možete naći na linku - https://github.com/grpc-ecosystem/go-grpc-middleware. A uvek možete implementirati i vaš, ako za time imate potrebe.  
 
-## Primer postavke gateway-a (Golang) - (Obavezno pogledati primere iako koristite .NET Gateway jer su osnovni koncepti objašnjeni u videima)
+## Primer postavke gateway-a (Golang)  
+### (Obavezno pogledati primere iako koristite .NET Gateway jer su osnovni koncepti objašnjeni u videima)
   
 U narednom <a href='https://www.youtube.com/watch?v=sIkZAWDgWkI'>videu</a> možeš pogledati postavku gRPC gateway-a (Golang).   
 Primer iz videa je dostupan na sledećem <a href='#'>link-u</a>. TODO: Dodati primer. 
@@ -46,7 +47,8 @@ Primer iz videa je dostupan na sledećem <a href='#'>link-u</a>. TODO: Dodati pr
 
 Primer sa složenijim Protobuf porukama (Napomena primer u sebi ima uključen tracer za praćenje zahteva i key-value bazu koju nismo posebno obrađivali ali vam može biti značajan da vidite neke složenije poruke, primer nije obavezno za sada prolaziti). TODO: Dodati primer. 
 
-## Primer postavke gateway-a (.NET)  (Kako se koriste koncepti iz prethodnih Golang videa, prvo je potrebno njih pogledati, ovo je samo primer kako bi izgledala implementacija u .NET tehnologiji)
+## Primer postavke gateway-a (.NET)
+### (Kako se koriste koncepti iz prethodnih Golang videa, prvo je potrebno njih pogledati, ovo je samo primer kako bi izgledala implementacija u .NET tehnologiji)
 
 Po uzoru na Golang primer, slično ćemo primeniti i na ASP .NET Core aplikaciju. Cilj je da između mikroservisa i između API Gateway-a i mikroservisa imamo RPC komunikaciju, dok se svetu tj. bilo kom klijentu moramo prilagoditi odnosno pružiti im mogućnost da koriste naše usluge po REST specifikaciji.  
 
