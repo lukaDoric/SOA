@@ -27,13 +27,13 @@ Druga razlika je u tome, što moramo malo proširiti naš Golang kod, da pokrene
 gRPC ima mnoštvo korisnih plugina koje možete da iskoristite i postoji dosta dostupnog middleware-a za bezbednost i proveru raznih stvaru u vašim zahtevima. U početku, oni mogu da deluju malo konfuzno i komplikovano ali kada se naviknete oni će vam znatno olakšati posao. Svi funkcionišu na sličan način, a to je presretanje zahteva, implementacija nekakve logike i propagacija zahteva dalje ili ne u zavisnosti od tipa middleware-a.  
 
 Primere za razne biblioteke možete naći na linku - https://github.com/grpc-ecosystem/go-grpc-middleware. A uvek možete implementirati i vaš, ako za time imate potrebe.  
+
+## Primer postavke gateway-a (Golang) - (Obavezno pogledati primere iako koristite .NET Gateway jer su osnovni koncepti objašnjeni u videima)
   
 U narednom <a href='https://www.youtube.com/watch?v=sIkZAWDgWkI'>videu</a> možeš pogledati postavku gRPC gateway-a (Golang).   
 Primer iz videa je dostupan na sledećem <a href='#'>link-u</a>. TODO: Dodati primer. 
 
 protoc komanda koja je korišćena u primeru:  
-
-protoc komanda iz videa - gRPC Gateway
 
 protoc -I ./proto \
 --go_out ./proto --go_opt paths=source_relative \
