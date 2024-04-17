@@ -124,4 +124,15 @@ return &pb.HelloReply{Message: "Hello again " + in.GetName()}, nil
 }
 ```
 
-Jedna napomena jeste da će sadržaj generisanja završiti na mestu gde vi specificirate i pod ekstenzijom **naziv_proto_fajla.pb.go** , ako niste specificirali drugačije. U prethodno definisanom fajlu pb.HelloRequest je poruka koja se nalazi unutar pb biblioteke, gde je pb skraćeni naziv za punu putanju gde se generisani *.pb.go fajl nalazi. Kompletan primer možete videti na sledećem linku - https://github.com/grpc/grpc-go/tree/master/examples/helloworld, kao i primer generisanog klijenta. Pored servera, i poruka protoc generiše i klijent koji možete koristiti da pozivate druge servise. Isto kao i kod REST a, ako imate dva servisa koja treba da komuniciju u tom slučaju jedan je klijent (traži uslugu), a drugi je server (obrađuje sadržaj).
+Jedna napomena jeste da će sadržaj generisanja završiti na mestu gde vi specificirate i pod ekstenzijom **naziv_proto_fajla.pb.go** , ako niste specificirali drugačije. U prethodno definisanom fajlu pb.HelloRequest je poruka koja se nalazi unutar pb biblioteke, gde je pb skraćeni naziv za punu putanju gde se generisani *.pb.go fajl nalazi. Kompletan primer možete videti na sledećem linku - https://github.com/grpc/grpc-go/tree/master/examples/helloworld, kao i primer generisanog klijenta. Pored servera, i poruka protoc generiše i klijent koji možete koristiti da pozivate druge servise. Isto kao i kod REST a, ako imate dva servisa koja treba da komuniciju u tom slučaju jedan je klijent (traži uslugu), a drugi je server (obrađuje sadržaj).  
+
+### Primer komunikacije dva Golang servisa (RPC)
+  
+U narednom <a href='https://www.youtube.com/watch?v=KHy_gHRePpU'>videu</a> možeš pogledati komunikacija dva Golang servisa.  
+Primer iz videa je dostupan na sledećem <a href='#'>link-u</a>. TODO: Dodati primer.  
+  
+protoc komanda iz primera iznad:  
+  
+protoc --go_out=./product --go_opt=paths=source_relative \
+--go-grpc_out=./product --go-grpc_opt=paths=source_relative \
+product_service.proto
