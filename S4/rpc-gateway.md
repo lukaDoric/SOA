@@ -45,3 +45,5 @@ U narednom <a href='https://youtu.be/RRG3LVRBuco'>videu</a> možeš pogledati po
 Primer iz videa je dostupan na sledećem <a href='#'>link-u</a>. TODO: Dodati primer.  
 
 Primer sa složenijim Protobuf porukama (Napomena primer u sebi ima uključen tracer za praćenje zahteva i key-value bazu koju nismo posebno obrađivali ali vam može biti značajan da vidite neke složenije poruke, primer nije obavezno za sada prolaziti). TODO: Dodati primer. 
+
+## Primer postavke gateway-a (.NET)
