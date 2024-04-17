@@ -8,7 +8,7 @@ Mikroservisna arhitektura podrazumeva postojanje velikog broja međusobno nezavi
 
 Kako bi se navedeni nedostaci prevazišli, uvodi se komponenta koja se naziva API Gateway. API Gateway je servis koji predstavlja jedinstvenu ulaznu tačku u sistem, enkapsulira unutrašnju arhitekturu i nudi API koji klijenti mogu koristiti.
 
-<img src="https://media.licdn.com/dms/image/D4E12AQGvHr7xO9uDgQ/article-cover_image-shrink_423_752/0/1664942913778?e=1684972800&v=beta&t=HD9hAyUV4BkpR4Wb5UNO66UguCY1B0of6aHbj48w-Ao" />
+<img src="https://ibb.co/KsdyYYn" />
 
 Glavna zaduženja API Gateway-a su:
 
