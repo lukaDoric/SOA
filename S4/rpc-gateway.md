@@ -57,6 +57,7 @@ nemamo ni jedan modul više prisutan, jer ovo treba da predstavlja samo ulaznu t
 
 ### Kreiranje API Gateway-a
 
+Preporuka je preuzeti primer i kroz njega pratiti naredne korake. TODO: Dodati link.  
 Prvi korak je da dodamo potrebne dependency-je u projekat kako bi radili sa gRPCem.  
 
 U okviru Explorer.API, u okviru ItemGroup elementa dodajemo sledeće:  
@@ -119,7 +120,7 @@ message AuthenticationTokens {
 }
 ```
 
-4. Stavljamo putanju do .proto specifikacije u okviru <ItemGroup> - <Protobuf Include="Protos\authentication.proto" />
+4. Stavljamo putanju do .proto specifikacije u okviru ItemGroup elementa - <Protobuf Include="Protos\authentication.proto" />
 5. Pokrećemo build komandu (u VisualStudio okruženju). 
 
 Napomena: Nakon ovog koraka možete resetovati okruženje jer nekad nije svesno novogenerisanih fajlova.
@@ -160,13 +161,15 @@ public class AuthenticationProtoController : Authorize.AuthorizeBase
 
 7. Obrati pažnju da kada kontaktiraš drugi mikroservis preko RPCa moraš koristiti sslPort tj. Http 2 protokol jer RPC samo na njemu funkcioniše. Kako bi izbegli rad sa sertifikatima, poturili smo opcije kroz httpHandler.
 
-8. U Program.cs je potrebno dodati:
-
-builder.Services.AddGrpc().AddJsonTranscoding();
+8. U Program.cs je potrebno dodati:  
+  
+builder.Services.AddGrpc().AddJsonTranscoding();  
 app.MapGrpcService<AuthenticationProtoController>();
 
 ### Kreiranje servisa kojeg će kontaktirate Gateway
-
+  
+Preporuka je preuzeti primer i kroz njega pratiti naredne korake. TODO: Dodati link.  
+  
 Pošto moramo sada da kontaktiramo izolovani Stakeholders modul po RPCu, i njemu će biti potrebna (veoma slična) .proto specifikacija kako bi ga mogli kontaktirati i dobiti odgovor.
 
 1. Prvo je potrebno izolovati Stakeholders modul da u jednom nezavisnom servisu budu samo njegov API sloj i sam Stakeholders modul.
