@@ -244,7 +244,7 @@ public class AuthenticationProtoController : Authorize.AuthorizeBase
 
 ```
 
-6. U Program.cs je potrebno dodati:
+7. U Program.cs je potrebno dodati:
 
 builder.Services.AddGrpc();
 app.MapGrpcService<AuthenticationProtoController>();
