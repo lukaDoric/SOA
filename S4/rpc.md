@@ -129,7 +129,7 @@ Jedna napomena jeste da će sadržaj generisanja završiti na mestu gde vi speci
 ### Primer komunikacije dva Golang servisa (RPC)
   
 U narednom <a href='https://www.youtube.com/watch?v=KHy_gHRePpU'>videu</a> možeš pogledati komunikacija dva Golang servisa.  
-Primer iz videa je dostupan na sledećem <a href='#'>link-u</a>. TODO: Dodati primer.  
+Primer iz videa je dostupan na sledećem <a href='https://drive.google.com/file/d/1QdsN1-9bc_bA4gMZa4hK_ZFhTLhQEJON/view?usp=sharing'>link-u</a>.
   
 protoc komanda iz primera iznad:  
   
