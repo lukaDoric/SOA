@@ -122,13 +122,13 @@ message AuthenticationTokens {
 }
 ```
 
-5. Stavljamo putanju do .proto specifikacije u okviru ItemGroup elementa - <Protobuf Include="Protos\authentication.proto" />
+5. Stavljamo putanju do .proto specifikacije u okviru ItemGroup elementa - ``` <Protobuf Include="Protos\authentication.proto" /> ```
 6. Pokrećemo build komandu (u VisualStudio okruženju). 
 
 Napomena: Nakon ovog koraka možete resetovati okruženje jer nekad nije svesno novogenerisanih fajlova.
 Napomena: Sada u okviru src -> Explorer.API -> obj -> Debug -> net7.0 -> Protos treba da vidiš generisane proto specifikacije (Authentication.cs i AuthenticationGrpc.cs).
 
-7. Napravimo kontroler koji će implementirati proto specifikaciju (npr. AuthenticationProtoController, slika ispod).
+7. Napravimo kontroler koji će implementirati proto specifikaciju (npr. AuthenticationProtoController, slika ispod). I radimo override generisane metode po proto specifikaciji.
 
 ```code
 public class AuthenticationProtoController : Authorize.AuthorizeBase
@@ -161,14 +161,14 @@ public class AuthenticationProtoController : Authorize.AuthorizeBase
 }
 ````
 
-8. Radimo override generisane metode po proto specifikaciji. Obrati pažnju da kada kontaktiraš drugi mikroservis preko RPCa moraš koristiti sslPort tj. Http 2 protokol jer RPC samo na njemu funkcioniše. Kako bi izbegli rad sa sertifikatima, poturili smo opcije kroz httpHandler.
+Napomena:  Obrati pažnju da kada kontaktiraš drugi mikroservis preko RPCa moraš koristiti sslPort tj. Http 2 protokol jer RPC samo na njemu funkcioniše. Kako bi izbegli rad sa sertifikatima, poturili smo opcije kroz httpHandler.
 
-9. U Program.cs je potrebno dodati:  
+8. U Program.cs je potrebno dodati:  
   
 builder.Services.AddGrpc().AddJsonTranscoding();  
 app.MapGrpcService<AuthenticationProtoController>();
 
-### Kreiranje servisa kojeg će kontaktirate Gateway
+### Kreiranje servisa koji će biti kontaktiran od strane gateway-a.
   
 Preporuka je preuzeti <a href='https://drive.google.com/file/d/1bq7snn4MvWhsoJh4aSB_VvS0aLLdIGAB/view?usp=drive_link'>primer</a> i kroz njega pratiti naredne korake.  
   
