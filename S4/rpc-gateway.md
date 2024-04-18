@@ -32,7 +32,7 @@ Primere za razne biblioteke možete naći na linku - https://github.com/grpc-eco
 ### (Obavezno pogledati primere iako koristite .NET Gateway jer su osnovni koncepti objašnjeni u videima)
   
 U narednom <a href='https://www.youtube.com/watch?v=sIkZAWDgWkI'>videu</a> možeš pogledati postavku gRPC gateway-a (Golang).   
-Primer iz videa je dostupan na sledećem <a href='#'>link-u</a>. TODO: Dodati primer. 
+Primer iz videa je dostupan na sledećem <a href='https://drive.google.com/file/d/1h3o1FMtmmUbCZBGK4_IFcPiZDxpahow9/view?usp=drive_link'>link-u</a>. 
 
 protoc komanda koja je korišćena u primeru:  
 
@@ -43,7 +43,7 @@ protoc -I ./proto \
 ./proto/greeter/greeter-service.proto
 
 U narednom <a href='https://youtu.be/RRG3LVRBuco'>videu</a> možeš pogledati postavku gRPC gateway-a (Golang) koji je sposoban da samostalno obradi zahteve (bez daljeg prosleđivanja servisima).   
-Primer iz videa je dostupan na sledećem <a href='#'>link-u</a>. TODO: Dodati primer.  
+Primer iz videa je dostupan na sledećem <a href='https://drive.google.com/file/d/1KeoXdCDcLFM_0IPtCy_ZNfIHpWAAaCwd/view?usp=sharing'>link-u</a>.    
 
 Primer sa složenijim Protobuf porukama (Napomena primer u sebi ima uključen tracer za praćenje zahteva i key-value bazu koju nismo posebno obrađivali ali vam može biti značajan da vidite neke složenije poruke, primer nije obavezno za sada prolaziti). TODO: Dodati primer. 
 
@@ -59,7 +59,7 @@ nemamo ni jedan modul više prisutan, jer ovo treba da predstavlja samo ulaznu t
 
 ### Kreiranje API Gateway-a
 
-Preporuka je preuzeti primer i kroz njega pratiti naredne korake. TODO: Dodati link.  
+Preporuka je preuzeti <a href='https://drive.google.com/file/d/1zRoRaByk2OVCymbOJTdnKxdNqqVkemJO/view?usp=drive_link'>primer</a> i kroz njega pratiti naredne korake.    
 
 1. Prvi korak je da dodamo potrebne dependency-je u projekat kako bi radili sa gRPCem.  
 
@@ -170,7 +170,7 @@ app.MapGrpcService<AuthenticationProtoController>();
 
 ### Kreiranje servisa kojeg će kontaktirate Gateway
   
-Preporuka je preuzeti primer i kroz njega pratiti naredne korake. TODO: Dodati link.  
+Preporuka je preuzeti <a href='https://drive.google.com/file/d/1bq7snn4MvWhsoJh4aSB_VvS0aLLdIGAB/view?usp=drive_link'>primer</a> i kroz njega pratiti naredne korake.  
   
 Pošto moramo sada da kontaktiramo izolovani Stakeholders modul po RPCu, i njemu će biti potrebna (veoma slična) .proto specifikacija kako bi ga mogli kontaktirati i dobiti odgovor.
 
