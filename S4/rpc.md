@@ -75,7 +75,7 @@ alati i biblioteke potrebne za rad sa gRPC-jem.
 
 gRPC framework **ne koristi JSON ili XML format** za prenos poruka između servisa, vec svoj binaran tip koji se zove **protobuf** . Definicija protobuf poruka je izuzetno jednostavna i za te potrebe se koristi DSL iz čega se dobija tip poruke za odgovarajući jezik ili jezike. Pored poruka, u istom file-u, možemo definisati i specifikacije servisa odnosno koje poruke naši servisi prihvataju, ali i šta su povratne vrednosti naših servisa. Primer ispod ilustruje definiciju servisa sa svojim porukama.
 
-### Postupak implementacije gRPC servisa
+### Postupak implementacije gRPC servisa (Golang)
 
 Kako bi implementirali dva servisa koji komuniciraju pomoću gRPC-a trebalo bi izvršiti sledeće korake:
 1. Definisanje servisa u okviru .proto fajla
