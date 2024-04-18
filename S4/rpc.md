@@ -69,7 +69,7 @@ alati i biblioteke potrebne za rad sa gRPC-jem.
 
 <img src="https://i.ibb.co/dpZbX7y/grpc-proto-concept.png" alt="grpc-proto-concept" border="0">
 
-**Napomena:** Komunikaciju između bilo koja dva servisa je moguće implementirati i putem REST-a i putem RPC-a. Kako u okviru projekta gradite mikroservisnu arhitekturu RPC je bolja opcija za "razmenu akcija" između mikroservisa. Svakako komunikacija klijenta (front dela aplikacije) i gateway-a ostaje po REST arhitekturalnom paternu.
+**Napomena:** Kako u okviru projekta gradite mikroservisnu arhitekturu RPC je bolja opcija za "razmenu akcija" između mikroservisa. Svakako komunikacija klijenta (front dela aplikacije) i gateway-a ostaje po REST arhitekturalnom paternu.
 
 ### Protobuf
 
