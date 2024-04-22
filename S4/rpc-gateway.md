@@ -125,8 +125,7 @@ message AuthenticationTokens {
 5. Stavljamo putanju do .proto specifikacije u okviru ItemGroup elementa - ``` <Protobuf Include="Protos\authentication.proto" /> ```
 6. Pokrećemo build komandu (u VisualStudio okruženju). 
 
-Napomena: Nakon ovog koraka možete resetovati okruženje jer nekad nije svesno novogenerisanih fajlova.
-Napomena: Sada u okviru src -> Explorer.API -> obj -> Debug -> net7.0 -> Protos treba da vidiš generisane proto specifikacije (Authentication.cs i AuthenticationGrpc.cs).
+Napomena: Nakon ovog koraka možete resetovati okruženje jer nekad nije svesno novogenerisanih fajlova. Sada u okviru src -> Explorer.API -> obj -> Debug -> net7.0 -> Protos treba da vidiš generisane proto specifikacije (Authentication.cs i AuthenticationGrpc.cs).
 
 7. Napravimo kontroler koji će implementirati proto specifikaciju (npr. AuthenticationProtoController, slika ispod). I radimo override generisane metode po proto specifikaciji.
 
@@ -212,8 +211,7 @@ message AuthenticationTokens {
 
 5. Pokrenemo build komandu (u VisualStudio okruženju).
 
-Napomena: Nakon ovog koraka možete resetovati okruženje jer nekad nije svesno novogenerisanih fajlova.
-Napomena: Sada u okviru src -> Explorer.API -> obj -> Debug -> net7.0 -> Protos treba da vidiš generisane proto specifikacije.
+Napomena: Nakon ovog koraka možete resetovati okruženje jer nekad nije svesno novogenerisanih fajlova. Sada u okviru src -> Explorer.API -> obj -> Debug -> net7.0 -> Protos treba da vidiš generisane proto specifikacije.
 
 6. Napravimo kontroler koji će implementirati proto specifikaciju tj. raditi override generisane metode.
 
@@ -248,7 +246,7 @@ public class AuthenticationProtoController : Authorize.AuthorizeBase
 
 7. U Program.cs je potrebno dodati:
 
-builder.Services.AddGrpc();
+builder.Services.AddGrpc();  
 app.MapGrpcService<AuthenticationProtoController>();
 
 Napomena: Sa obzirom da ima puno detalja (tj. na više mesta je potrebno staviti tačno određenu liniju koda, pogledati kako je urađeno u primerima).
