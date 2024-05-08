@@ -51,3 +51,4 @@ Dodatna funkcionalnost koju NATS nudi je queue
 **Napomena:** U okviru projekta ideja je da sinhrone pozive između servisa razvijete putem gRPC-a, dok bi asinhrone pozive trebalo realizovati kroz NATS (SAGA pattern o kom će biti više reči kasnije).
 
 Video materijal: https://www.youtube.com/watch?v=JHMekgDkc-8
+Primeri: https://github.com/lukaDoric/SOA/tree/main/S5/NATS_primer
