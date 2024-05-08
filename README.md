@@ -9,3 +9,4 @@ Materijali za prvi sprint se nalaze <a href='https://github.com/lukaDoric/SOA/bl
 Materijali za drugi sprint se nalaze <a href='https://github.com/lukaDoric/SOA/blob/main/S2/s2readme.md'>ovde</a>.  
 Materijali za treći sprint se nalaze <a href='https://github.com/lukaDoric/SOA/tree/main/S3'>ovde</a>.  
 Materijali za četvrti sprint se nalaze <a href='https://github.com/lukaDoric/SOA/tree/main/S4'>ovde</a>.
+Materijali za peti sprint se nalaze <a href='https://github.com/lukaDoric/SOA/tree/main/S5'>ovde</a>.
