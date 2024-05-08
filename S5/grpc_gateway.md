@@ -29,8 +29,10 @@ gRPC ima mnoštvo korisnih plugina koje možete da iskoristite i postoji dosta d
 Primere za razne biblioteke možete naći na linku - https://github.com/grpc-ecosystem/go-grpc-middleware. A uvek možete implementirati i vaš, ako za time imate potrebe.
 
 Video materijal:
-https://www.youtube.com/watch?v=sIkZAWDgWkI
-https://youtu.be/RRG3LVRBuco
 
-gRPC Gateway primer: https://github.com/lukaDoric/SOA/tree/main/S5/gRPC-Gateway
-Gateway sa samostalnom obradom zahteva: 
+- https://www.youtube.com/watch?v=sIkZAWDgWkI
+- https://youtu.be/RRG3LVRBuco
+
+gRPC Gateway primer:  https://github.com/lukaDoric/SOA/tree/main/S5/gRPC-Gateway
+
+Gateway sa samostalnom obradom zahteva: https://github.com/lukaDoric/SOA/tree/main/S5/Gateway-Samostalna-Obrada-Zahteva
