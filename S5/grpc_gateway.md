@@ -33,6 +33,18 @@ Video materijal:
 - https://www.youtube.com/watch?v=sIkZAWDgWkI
 - https://youtu.be/RRG3LVRBuco
 
+protoc komanda iz prvog videa - gRPC Gateway
+
+```bash
+protoc -I ./proto \\  
+       --go_out ./proto --go_opt paths=source_relative \\  
+       --go-grpc_out ./proto --go-grpc_opt paths=source_relative \\  
+       --grpc-gateway_out ./proto --grpc-gateway_opt paths=source_relative \\  
+       ./proto/greeter/greeter-service.proto
+```
+       
 gRPC Gateway primer:  https://github.com/lukaDoric/SOA/tree/main/S5/gRPC-Gateway
 
 Gateway sa samostalnom obradom zahteva: https://github.com/lukaDoric/SOA/tree/main/S5/Gateway-Samostalna-Obrada-Zahteva
+
+Primer sa složenijim Protobuf porukama (Napomena primer u sebi ima uključen tracer za praćenje zahteva i key-value bazu koju nismo posebno obrađivali ali vam može biti značajan da vidite neke složenije poruke, primer nije obavezno za sada prolaziti):   
