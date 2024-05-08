@@ -1,0 +1,21 @@
+Jaeger UI: http://localhost:16686/
+
+---------------------------------
+
+Using make
+
+To build use make build
+
+To start use make run
+
+To stop use make stop
+
+----------------------------------
+
+Using docker
+
+To build docker-compose build
+
+To start use docker-compose up
+
+To stop use docker-compose down
