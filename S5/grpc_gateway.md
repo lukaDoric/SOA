@@ -31,3 +31,6 @@ Primere za razne biblioteke možete naći na linku - https://github.com/grpc-eco
 Video materijal:
 https://www.youtube.com/watch?v=sIkZAWDgWkI
 https://youtu.be/RRG3LVRBuco
+
+gRPC Gateway primer: https://github.com/lukaDoric/SOA/tree/main/S5/gRPC-Gateway
+Gateway sa samostalnom obradom zahteva: 
