@@ -47,4 +47,4 @@ gRPC Gateway primer:  https://github.com/lukaDoric/SOA/tree/main/S5/gRPC-Gateway
 
 Gateway sa samostalnom obradom zahteva: https://github.com/lukaDoric/SOA/tree/main/S5/Gateway-Samostalna-Obrada-Zahteva
 
-Primer sa složenijim Protobuf porukama (Napomena primer u sebi ima uključen tracer za praćenje zahteva i key-value bazu koju nismo posebno obrađivali ali vam može biti značajan da vidite neke složenije poruke, primer nije obavezno za sada prolaziti):   
+Primer sa složenijim Protobuf porukama (Napomena primer u sebi ima uključen tracer za praćenje zahteva i key-value bazu koju nismo posebno obrađivali ali vam može biti značajan da vidite neke složenije poruke, primer nije obavezno za sada prolaziti): https://github.com/lukaDoric/SOA/tree/main/S5/Gateway-Slozenije-Poruke
