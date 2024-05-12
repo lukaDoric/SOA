@@ -2,6 +2,6 @@
 - SAGA pattern: https://youtu.be/jVaPgR4PzZk
 - Aplikacija koja korisi API composition i SAGA pattern:
   - https://github.com/tamararankovic/microservices_demo
-  - https://youtu.be/MFWJtnSxsSY
-  - https://youtu.be/Bm2VrL4DrnM
-  - https://youtu.be/spNgb5RjvLQ
+  - Video koji opisuje primer od iznad: https://youtu.be/MFWJtnSxsSY
+  - Video koji prolazi kroz implementaciju API composition šablona: https://youtu.be/Bm2VrL4DrnM
+  - Video koji prolazi kroz implementaciju SAGA šablona: https://youtu.be/spNgb5RjvLQ
