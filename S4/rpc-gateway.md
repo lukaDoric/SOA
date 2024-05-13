@@ -45,7 +45,7 @@ protoc -I ./proto \
 U narednom <a href='https://youtu.be/RRG3LVRBuco'>videu</a> možeš pogledati postavku gRPC gateway-a (Golang) koji je sposoban da samostalno obradi zahteve (bez daljeg prosleđivanja servisima).   
 Primer iz videa je dostupan na sledećem <a href='https://drive.google.com/file/d/1KeoXdCDcLFM_0IPtCy_ZNfIHpWAAaCwd/view?usp=sharing'>link-u</a>.    
 
-Primer sa složenijim Protobuf porukama (Napomena primer u sebi ima uključen tracer za praćenje zahteva i key-value bazu koju nismo posebno obrađivali ali vam može biti značajan da vidite neke složenije poruke, primer nije obavezno za sada prolaziti). TODO: Dodati primer. 
+<a href='https://drive.google.com/file/d/1mivuufaOfMJfkFHCGkv01A5wdYXKjnjb/view?usp=drive_link'>Primer </a>sa složenijim Protobuf porukama (Napomena primer u sebi ima uključen tracer za praćenje zahteva i key-value bazu koju nismo posebno obrađivali ali vam može biti značajan da vidite neke složenije poruke, primer nije obavezno za sada prolaziti). 
 
 ## Primer postavke gateway-a (.NET)
 ### (Kako se koriste koncepti iz prethodnih Golang videa, prvo je potrebno njih pogledati, ovo je samo primer kako bi izgledala implementacija u .NET tehnologiji)
