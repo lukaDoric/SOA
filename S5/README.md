@@ -4,18 +4,14 @@ Na osnovu dosadašnjeg izgrađenog projekta potrebno je:
 1. Implementirati SAGA obrazac na barem dva mesta u projektu. Svaki slučaj SAGE mora uključiti barem dva mikroservisa. Dakle potrebno je osmisliti ili iskoristiti trenutne funkcionalnosti koje uključuju barem 2 mikroservisa kako bi se nad njima implmentirala SAGA.  
 
 2. Tracing:  
-Neophodno je implementirati tracing nad svim servisima mikroservisne aplikacije i prikazati u nekom alatu za vizualizaciju.  
+Neophodno je implementirati tracing barem negde u okviru mikroservisne aplikacije i prikazati u nekom alatu za vizualizaciju.  
 
-4. Logging:  
-Neophodno je implementirati agregraciju logova nad svim servisima mikroservisne aplikacije i prikazati u nekom alatu za vizualizaciju.  
+3. Logging:  
+Neophodno je implementirati agregraciju logova barem negde u okviru mikroservisne aplikacije i prikazati u nekom alatu za vizualizaciju.  
 
-6. Metrike:  
-
-4.1 Metrike operativnog sistema host mašine na kojoj će mikroservisna aplikacija biti podignuta. Minimum treba obezbedtiti informacije o iskorišćenju procesora, RAM memorije, file sistema i protok mrežnog saobraćaja.  
-
-4.2 Metrike kontejnera koji se koriste u mikroservisnoj aplikaciji. Minimum treba obezbedtiti informacije o iskorišćenju procesora, RAM memorije, file sistema i protok mrežnog saobraćaja.  
-
-4.3 Mektrike Web saobraćaja u mikroservisnoj aplikaciji:  
+4. Metrike:
+   
+Mektrike Web saobraćaja u mikroservisnoj aplikaciji:  
 ○ Ukupan broj HTTP zahteva u prethodnih 24 sata.  
 ○ Broj uspešnih HTTP zahteva u prethodnih 24 sata (2xx, 3xx).  
 ○ Broj neuspešnih zahteva u prethodnih 24 sata (4xx, 5xx).  
