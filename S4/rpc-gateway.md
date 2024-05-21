@@ -252,4 +252,12 @@ app.MapGrpcService<AuthenticationProtoController>();
 Napomena: Sa obzirom da ima puno detalja (tj. na više mesta je potrebno staviti tačno određenu liniju koda, pogledati kako je urađeno u primerima).
 Takođe u okviru API Gateway-a možete sve kontrolere koji implementiraju proto specifikaciju zaštiti kao i do sada određenim policy-em.
 
-Sada možemo da pokrenemo oba servisa (Gateway i Stakeholders), potom kontaktiramo API Gateway, po REST-u sa imenom i šifrom. On će preuzeti zahtev po REST-u, prevesti ga u RPC, kontaktirati Stakeholders mikroservis po RPC gde ćemo dobiti odgovor u vidu JWT-a i prevesti nazad odgovor korisniku po REST specifikaciji.
+Sada možemo da pokrenemo oba servisa (Gateway i Stakeholders), potom kontaktiramo API Gateway, po REST-u sa imenom i šifrom. On će preuzeti zahtev po REST-u, prevesti ga u RPC, kontaktirati Stakeholders mikroservis po RPC gde ćemo dobiti odgovor u vidu JWT-a i prevesti nazad odgovor korisniku po REST specifikaciji.  
+
+### Dodatni materijali za RPC i dokerizovane ASP .NET servise  
+
+Na narednom <a href='https://drive.google.com/file/d/11rlwaBchJauhxgZsxiVfP4TwnjPQKf_8/view?usp=drive_link'>linku</a> možete pristupiti primeru koji sadrži slična dva projekta kao iznad (gateway i auth servis). Primer nema bazu i služi samo da demonstrira kako da kontaktirate ASP .NET kontejner po RPC. Kako ASP .NET Core aplikacije zahtevaju TLS za RPC komunikaciju moraju da se generišu sertifikati za klijentsku aplikaciju (onu koju kontaktiramo po RPC) i otvori https port.  
+
+1. Na sledećem <a href='https://learn.microsoft.com/en-us/aspnet/core/security/docker-https?view=aspnetcore-8.0'>linku</a> možeš videti kako da generišeš dev sertifikat i kopiraš ga u svoj kontejner.
+2. Obrati pažnju na konfiguraciju portova u appsettings.json klijentske aplikacije (auth servisa).
+3. Obrati pažnju na Dockerfile klijentske aplikacije i docker-compose.
