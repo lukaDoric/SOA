@@ -1,0 +1,10 @@
+groups:
+  - name: node_rules
+    rules:
+      - record: job:node_memory_MemAvailable_bytes:available
+        expr: (node_memory_MemAvailable_bytes / node_memory_MemTotal_bytes ) * 100
+
+  - name: instance_rules
+    rules:
+      - record: instance:process_cpu_seconds:rate5m
+        expr: avg without(job)(rate(process_cpu_seconds_total[5m]))
