@@ -2,14 +2,7 @@
 
 Application that manages weapons in dojo. Data are stored in relational database POSTGRES 13.
 
-Build the image:
-```shell
-docker buildx build -t danijelradakovic/dojo \
-  --target release-alpine \
-  --build-arg SRC=cmd/dojo/main.go .
-```
-
-Building container images can also be achieved using docker compose:
+Building containers:
 ```shell
 docker compose --env-file env.conf build
 ```
