@@ -30,7 +30,7 @@ U primeru observability stack čine:
 
 Primeri koda koji se koriste u nastavnku lekcije su dostupni na:
 
-- Go sa gin-gonic framework-om: https://github.com/DanijelRadakovic/dojo
+- Go sa gin-gonic framework-om: https://github.com/lukaDoric/SOA/tree/main/S5/monitoring_go
 - Java sa SpringBoot framework-om: https://github.com/DanijelRadakovic/server
 
 Kompletan observability stack se pokreće pomoću docker-a, tako da je taj deo identičan u oba primera.  
