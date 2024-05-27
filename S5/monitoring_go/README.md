@@ -1,28 +1,27 @@
 # Dojo
 
-Application that manages weapons in dojo. Data are stored in relational database POSTGRES 13.
+U ovom primeru imamo CRUD aplikaciju (dojo) goja prima GET i POST zahteve. Koristićemo je za demonstraciju monitoringa i prikupljanja metrika
 
-Building containers:
+Prvo treba pokrenuti docker compose gde se nalaze svi alati za metrike:
+
 ```shell
-docker compose --env-file env.conf build
+cd monitoring
+docker compose up -d
 ```
 
-Generate docker compose configuration with specified environment variables:
+Zatim treba da pronađemo IP adresu fluent-bit kontejnera (servis za prikupljanje docker logova). Za ovo treba da iskoristite komandu docker ps, i pronađete naziv kontejnera za fluent-bit. U mom primeru je to `monitoring-fluent-bit-1`. 
+
 ```shell
-docker compose --env-file env.conf config
+docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' monitoring-fluent-bit-1
 ```
 
-Provision the infrastructure:
+IP adresu koju dobijete treba da upišete u env.conf datoteku, umesto trenutne IP adrese koja stoji pored FLUENT_BIT_ADDRESS promenjive.
+Nakon toga možete pokrenuti i mikroservisnu aplikaciju:
 ```shell
-docker compose --env-file env.conf up
+docker compose --env-file env.conf up -d
 ```
 
-Destroy the provisioned infrastructure:
-```shell
-docker compose --env-file env.conf down -v
-```
-
-Test the application:
+Testirajte aplikaciju uz sledeće HTTP zahteve:
 ```shell
 curl -X POST "http://localhost:8080/weapon?id=0&weapon=katana"
 curl -X POST "http://localhost:8080/weapon?id=1&weapon=ninjaStar"
@@ -32,25 +31,7 @@ curl "http://localhost:8080/weapon"
 
 ```
 
-## Monitoring
-
-Create the monitoring stack with docker compose:
-```shell
-pushd monitoring
-docker compose up
-popd
-```
-
-Take the IP address of fluent-bit container and replace the value of FLUENT_BIT_ADDRESS variable
-in env.conf file:
-```shell
-docker network inspect monitoring
-```
-
-Create the application stack with docker compose:
-```shell
-docker compose --env-file env.conf up
-```
+Na adresi localhost:3000 možete pristupiti Grafana alatu za vizualizaciju metrika. Ako vam traži kredencijale, i username i password su admin. Na osnovu slika koje se nalaze ispod možete kreirati dashboard-ove koji će prikazivati metrike iz go aplikacije, logove, tracing poziva između servisa, itd.
 
 ### Tracing
 
