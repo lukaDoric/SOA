@@ -1,8 +1,7 @@
 x-logging: &fluent-bit
   driver: fluentd
   options:
-    fluentd-address: fluentd:24224
-    fluentd-async-connect: "true"
+    fluentd-address: ${FLUENT_BIT_ADDRESS}:24224
 
 services:
   dojo:
