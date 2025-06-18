@@ -1,24 +1,4 @@
-## Peti sprint (13.05 - 03.06)
-
-Na osnovu dosadašnjeg izgrađenog projekta potrebno je:  
-1. Implementirati SAGA obrazac na barem jednom mestu u projektu. Svaki slučaj SAGE mora uključiti barem dva mikroservisa. Dakle potrebno je osmisliti ili iskoristiti trenutne funkcionalnosti koje uključuju barem 2 mikroservisa kako bi se nad njima implmentirala SAGA.  
-
-2. Tracing:  
-Neophodno je implementirati tracing barem negde u okviru mikroservisne aplikacije i prikazati u nekom alatu za vizualizaciju.  
-
-3. Logging:  
-Neophodno je implementirati agregraciju logova barem negde u okviru mikroservisne aplikacije i prikazati u nekom alatu za vizualizaciju.  
-
-4. Metrike:
-   
-4.1 Metrike operativnog sistema host mašine na kojoj će mikroservisna
-aplikacija biti podignuta. Minimum treba obezbedtiti informacije o
-iskorišćenju procesora, RAM memorije, file sistema i protok mrežnog
-saobraćaja.  
-
-4.2 Metrike kontejnera koji se koriste u mikroservisnoj aplikaciji. Minimum
-treba obezbedtiti informacije o iskorišćenju procesora, RAM memorije,
-file sistema i protok mrežnog saobraćaja. 
+## SAGA i monitoring
 
 Materijali:  
 - <a href='https://github.com/lukaDoric/SOA/blob/main/S5/asinhrona_komunikacija.md'>Asinhrona komunikacija.</a>  
