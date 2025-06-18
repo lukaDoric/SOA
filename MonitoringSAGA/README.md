@@ -1,6 +1,5 @@
 ## SAGA i monitoring
 
-Materijali:  
 - <a href='https://github.com/lukaDoric/SOA/blob/main/MonitoringSaga/asinhrona_komunikacija.md'>Asinhrona komunikacija.</a>  
 - <a href='https://github.com/lukaDoric/SOA/blob/main/MonitoringSaga/api_composition_saga.md'>API composition i SAGA.</a>
 - <a href='https://github.com/lukaDoric/SOA/blob/main/MonitoringSaga/monitoring.md'>Monitoring/Logging/Tracing</a>
