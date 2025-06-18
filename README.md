@@ -6,8 +6,8 @@ Repozitorijum za materijale koji podržavaju izradu projekta iz predmeta "Servis
 <a href='https://docs.google.com/presentation/d/1UZya8ywAeOozDKeEDMFS3IOJMcELQUzK/edit?rtpof=true&sd=true'>Uvodna prezentacija</a>.  
 <a href='https://docs.google.com/spreadsheets/d/1IaycFUKvHsfi4cF8KV3DRMlh1QAr0VFRNddiYw0kuZs/edit#gid=0'>Spisak timova</a>.    
 
-Materijali za Golang se nalaze <a href='https://github.com/lukaDoric/SOA/blob/main/Golang/golang-uvod.md'>ovde</a>.  
+Materijali za Golang se nalaze <a href='https://github.com/lukaDoric/SOA/blob/main/Golang/README.md'>ovde</a>.  
 Materijali za Docker se nalaze <a href='https://github.com/lukaDoric/SOA/tree/main/Docker/docker.md'>ovde</a>.  
-Materijali za NoSQL se nalaze <a href='https://github.com/lukaDoric/SOA/tree/main/NoSQL/'>ovde</a>.  
-Materijali za mikroservise, gateway i RPC se nalaze <a href='https://github.com/lukaDoric/SOA/tree/main/MikroservisiGatewayRPC'>ovde</a>.  
-Materijali za SAGU i monitoring se nalaze <a href='https://github.com/lukaDoric/SOA/tree/main/MonitoringSAGA'>ovde</a>.
+Materijali za NoSQL se nalaze <a href='https://github.com/lukaDoric/SOA/tree/main/NoSQL/README.md'>ovde</a>.  
+Materijali za mikroservise, gateway i RPC se nalaze <a href='https://github.com/lukaDoric/SOA/tree/main/MikroservisiGatewayRPC/README.md'>ovde</a>.  
+Materijali za SAGU i monitoring se nalaze <a href='https://github.com/lukaDoric/SOA/tree/main/MonitoringSAGA/README.md'>ovde</a>.
