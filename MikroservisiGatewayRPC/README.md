@@ -8,5 +8,7 @@ Na osnovu dosadašnjeg izgrađenog projekta potrebno je:
 
 Napomena: Ako ste razvijali projekat od početnog rešenja (sa PSW) gateway možete ostaviti u .NET-u ali ima malo slabiju podršku za rad sa RPC tj. nema automatsko preusmeravanje zahteva na određeni servis već ćete morati ručno da instancirate klijenta u kontroleru. Nakon pogledanih materijala i za .NET i za Golang odlučite na nivou tima u kojoj tehnologiji ćete implementirati API Gateway.
 
-<a href=''>Osnove mikroservisa</a>
-<a href='https://github.com/lukaDoric/SOA/blob/main/S4/api-gateway.md'>Teorijske osnove API Gateway-a.</a>
+<a href=''>Osnove mikroservisa</a>  
+<a href='https://github.com/lukaDoric/SOA/blob/main/S4/api-gateway.md'>Teorijske osnove API Gateway-a.</a>  
+<a href='https://github.com/lukaDoric/SOA/blob/main/S4/api-gateway.md'>RPC</a>  
+<a href='https://github.com/lukaDoric/SOA/blob/main/S4/api-gateway.md'>RPC Gateway</a>
