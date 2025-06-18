@@ -1,5 +1,3 @@
-## Drugi sprint (18.03 - 1.04)
-
 Na osnovu arhitekture sa prve KT (početna monolitna aplikacija i dva izolovana servisa) potrebno je:  
 1. Dokerizovati čitav bekend deo (frontend nije potrebno dokerizovati).  
 1.1 Potrebno je napisati Dockerfile za svaki servis (monolitnu aplikaciju i dva izolovana servisa).  
