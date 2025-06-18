@@ -9,5 +9,5 @@ Repozitorijum za materijale koji podržavaju izradu projekta iz predmeta "Servis
 Materijali za Golang se nalaze <a href='https://github.com/lukaDoric/SOA/blob/main/Golang/golang-uvod.md'>ovde</a>.  
 Materijali za Docker se nalaze <a href='https://github.com/lukaDoric/SOA/tree/main/Docker/docker.md'>ovde</a>.  
 Materijali za NoSQL se nalaze <a href='https://github.com/lukaDoric/SOA/tree/main/NoSQL/'>ovde</a>.  
-Materijali za mikroservise, gateway i RPC se nalaze <a href='https://github.com/lukaDoric/SOA/tree/main/S4'>ovde</a>.  
-Materijali za SAGU i monitoring se nalaze <a href='https://github.com/lukaDoric/SOA/tree/main/S5'>ovde</a>.
+Materijali za mikroservise, gateway i RPC se nalaze <a href='https://github.com/lukaDoric/SOA/tree/main/MikroservisiGatewayRPC'>ovde</a>.  
+Materijali za SAGU i monitoring se nalaze <a href='https://github.com/lukaDoric/SOA/tree/main/MonitoringSAGA'>ovde</a>.
