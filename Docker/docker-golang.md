@@ -71,7 +71,7 @@ Postoji naravno još komandi i puno dodatnih flegova za svaku komandu, i dodatne
 <h2>Kako kreirati sopstvene slike?</h2>
 
 Kreiranje prve docker slike: [Prva Docker slika](https://youtu.be/xfuSdAcusfw)  
-Primer prikazan u snimku iznad je dostupan na sledećem <a href='https://github.com/lukaDoric/SOA/tree/main/S2/go_primeri/SimpleStaticWebServer'>link-u  </a>  
+Primer prikazan u snimku iznad je dostupan na sledećem <a href='https://github.com/lukaDoric/SOA/tree/main/Docker/go_primeri/SimpleStaticWebServer'>link-u  </a>  
 
 Videli smo kako da pokrenemo kontejnere na osnovu već postojećih slika, ali ono što nas konkretno interesuje jeste kako da kreiramo sopstvene slike i da pomoću njih pokrenemo naše kontejnere u kojima će se izvršavati neki konkretan mikroservis. Za potrebe kreiranja naše slike neophodno je da kreiramo Dockerfile (sa tim nazivom) odnosno tekstualnu datoteku (najbolja praksa je da se ona nalazi u root direktorijumu projekta) koja koristi bazični DSL sa instrukcijama za kreiranje slika. Kada kreiramo taj fajl, komandom docker image build ćemo kreirati našu sliku izvršavanjem instrukcija koje smo napisali, i zatim ćemo od te slike startovati kontejner.
 
@@ -144,7 +144,7 @@ U nastavku sledi kompleksniji primer u kom pokrećemo više servisa od jednom:
 [Multistage build](https://youtu.be/_EYy81VGrJ0)  
 [Primer docker-compose.yaml sa više servisa i env varijablama](https://youtu.be/gtnnIr3aET4)  
 
-Primer je dostupan na sledećem <a href='https://github.com/lukaDoric/SOA/tree/main/S2/go_primeri/WebServerWithDB'>link-u</a>.
+Primer je dostupan na sledećem <a href='https://github.com/lukaDoric/SOA/tree/main/Docker/go_primeri/WebServerWithDB'>link-u</a>.
 
 U prethodnom poglavljima je objašnjena manipulacija ​volume-​a, kako kreirati sopstvenu sliku i kako od nje kreirati kontejner. Međutim, postavlja se pitanje šta raditi ukoliko imamo više aplikacija, od kojih je neke neophodno pokrenuti u više instanci (kontejnera), koji moraju da komuniciraju međusobno. Tada pojedinačno kreiranja slika i pokretanja kontejnera nije praktično rešenje. Zato se koristi alat `docker compose` ​koji nam omogućuje pokretanje i zaustavljanje ​više aplikacija koristeći jednu komandu, kao i zejdnički ispis logova svih aplikacija na jedan terminal.
 
