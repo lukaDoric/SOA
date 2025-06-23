@@ -52,4 +52,4 @@ Dodatna funkcionalnost koju NATS nudi je queue
 
 Video materijal: https://www.youtube.com/watch?v=JHMekgDkc-8
 
-Primeri: https://github.com/lukaDoric/SOA/tree/main/S5/NATS_primer
+Primeri: https://github.com/lukaDoric/SOA/tree/main/MonitoringSAGA/NATS_primer
