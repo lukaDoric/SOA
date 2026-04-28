@@ -18,7 +18,7 @@ Glavna zaduženja API Gateway-a su:
 
 Svi zahtevi koje eksterni klijenti šalju prvo stižu do API Gateway-a koji u zavisnosti od samog zahteva vrši prosleđivanje zahteva odgovarajućem servisu. Ukoliko zahtev podrazumeva dobavljanje podataka koje poseduju različiti servisi, API Gateway može uputiti odgovarajuće zahteve i agregirati dobijene rezultate, a zatim ih proslediti klijentu. Što se tiče translacije protokola, API Gateway se često implementira tako da nudi RESTful API zbog rasprostranjenosti ovog arhitektonskog stila i raznovrsnosti klijenata koji ga podržavaju, dok aplikativni servisi interno mogu koristiti neke druge protokole, kao što je na primer gRPC. Kada postoje neslaganja u protokolima, API Gateway je zadužen da obavi neophodnu translaciju između eksternog i internog API-ja. 
 
-Nije redak slučaj da API Gateway ima i dodatna zaduđenja, takozvane edge funkcionalnosti. Neke od njih su:
+Nije redak slučaj da API Gateway ima i dodatna zaduženja, takozvane edge funkcionalnosti. Neke od njih su:
 
 - Ograničenje stope pristupa
 - Keširanje
